@@ -12,9 +12,9 @@ import { uploadAPI } from "../api/upload/upload";
 import { scheduleAPI } from "../api/schedule/schedule";
 
 const CreateSchedule = () => {
-  const initSchedule = { name: "", thongtinthem: "", soluong: "", gia: "" };
+  const initSchedule = { name: "", thongtinthem: "", soluong: "", gia: "", thoigianbatdau:"", thoigianketthuc: "" };
   const [adminSchedule, setAdminSchedule] = useState(initSchedule);
-  const { name, thongtinthem, soluong, gia } = adminSchedule;
+  const { name, thongtinthem, soluong, gia,thoigianbatdau,thoigianketthuc } = adminSchedule;
   const [idPlace, setIdPlace] = useState("");
   const [selectPlace, setSelectPlace] = useState([]);
   const [inputFile, setInputFile] = useState();
@@ -63,22 +63,24 @@ const CreateSchedule = () => {
   }, [inputFile]);
 
   const handleCreateSchedule = (e) => {
-      e.preventDefault();
-      const body = {
-          "name":name,
-          "place": idPlace,
-          "image": image,
-          "thongtinthem": thongtinthem,
-          "soluong": soluong,
-          "gia": gia,
-          "thoigianbatdau": startDate,
-          "thoigianketthuc": finishDate
-      }
-      scheduleAPI.createChedule(body)  
-        .then(res=>{
-            console.log(res)
-        })
-        .catch(err=>console.log(err))
+    e.preventDefault();
+    const body = {
+      name: name,
+      place: idPlace,
+      image: image,
+      thongtinthem: thongtinthem,
+      soluong: soluong,
+      gia: gia,
+      thoigianbatdau: thoigianbatdau,
+      thoigianketthuc: thoigianketthuc,
+    };
+    scheduleAPI
+      .createChedule(body)
+      .then((res) => {
+        console.log(res);
+        Router.replace("/schedule/getAllSchedule");
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -173,13 +175,19 @@ const CreateSchedule = () => {
             Thời gian bắt đầu
           </label>
           <br />
-          {/* <input
+          <input
             id="name"
             type="text"
             className="profile-input"
             name="thoigianbatdau"
+            onChange={handleChangeSchedule}
+          />
+          {/* <DatePicker
+            // selected={startDate}
+            value={startDate}
+            onChange={(date) => setStartDate(date)}
           /> */}
-          <DatePicker
+          {/* <DatePicker
             selected={startDate}
             onChange={(date) => {
               setStartDate(date);
@@ -191,13 +199,17 @@ const CreateSchedule = () => {
             dateFormat="MMMM d, yyyy h:mm aa"
             className="profile-input"
             style={{ width: "100%" }}
-          />
+          /> */}
 
           <label htmlFor="name" className="profile-textlabel">
             Thời gian kết thúc
           </label>
           <br />
-          <DatePicker
+          {/* <DatePicker
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+          /> */}
+          {/* <DatePicker
             selected={finishDate}
             onChange={(date) => {
               setFinishDate(date);
@@ -208,13 +220,14 @@ const CreateSchedule = () => {
             maxTime={setHours(setMinutes(new Date(), 30), 20)}
             className="profile-input"
             dateFormat="MMMM d, yyyy h:mm aa"
-          />
-          {/* <input
+          /> */}
+          <input
             id="name"
             type="text"
             className="profile-input"
             name="thoigianketthuc"
-          /> */}
+            onChange={handleChangeSchedule}
+          />
         </div>
         <div className="button-container">
           <button className="profile-button" onClick={handleCreateSchedule}>

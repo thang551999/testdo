@@ -64,6 +64,15 @@ function Layout(props) {
                   Schedule
                 </Link>
               </li>
+              <li className="nav-list-item">
+                <Link
+                  href="/checkin"
+                  className="nav-list-item-link"
+                  id="nav-item-orders"
+                >
+                  Check In
+                </Link>
+              </li>
             </ol>
           </div>
         </div>

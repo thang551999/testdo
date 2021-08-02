@@ -6,6 +6,7 @@ const token = Cookies.get("token");
 export const ptAPI = {
   getAllPt,
   createPt,
+  deletePt,
 };
 
 function getAllPt() {
@@ -22,4 +23,12 @@ function createPt(body) {
       Authorization: `Bearer ${token}`,
     },
   });
+}
+
+function deletePt(id){
+  return axios.get("http://18.216.251.104:5000/api/admin/delpt/"+id,{
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
 }

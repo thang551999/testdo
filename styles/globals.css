@@ -40,3 +40,7 @@ a {
 /* Schedule */
 
 @import url("./schedule/schedule.css");
+
+/* Check In */
+
+@import url("./checkin/checkin.css");

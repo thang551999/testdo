@@ -2,42 +2,48 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { placeAPI } from "../api/place/place";
-import { Button } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import { useRouter } from "next/dist/client/router";
 import { Image } from "react-bootstrap";
+import { scheduleAPI } from "../api/schedule/schedule";
 
 const getAllSchedule = () => {
-    const Router = useRouter();
-  var initPlace = [];
-  const [adminPlace, setAdminPlace] = useState([]);
+  const Router = useRouter();
+  const [placeSchedule, setPlaceShedule] = useState([]);
+  const [schedule, setSchedule] = useState([]);
+  const [lgShow, setLgShow] = useState(false);
+  const [message, setMessage] = useState("");
+  const [idChedule, setIdChedule] = useState("");
   useEffect(() => {
     placeAPI
       .getAllPlace()
       .then((res) => {
-        // console.log(res.data.length);
-        // setAdminPlace(res.data)
-        initPlace.push(res.data);
-        console.log(res.data);
-        console.log(initPlace[0][1].name);
-        setAdminPlace(initPlace[0]);
+        // console.log(res.data.chedule);
+        setPlaceShedule(res.data);
+        setSchedule(res.data.schedule);
       })
       .catch((err) => console.log(err));
   });
-  //   console.log(initPlace);
 
-  const handleToCreatePt = () =>{
-    Router.replace("/pt/creatept");
-  }
-
-  const handleToCreateCourse = () => {
-    Router.replace("/course/createCourse");
+  const handleDelete = id => e => {
+    scheduleAPI.deleteSchedule(id) 
+      .then(res=>{
+        // console.log(res)
+        setMessage(res.data.message)
+        // Router.replace("/pt/getallpt")
+        window.location.reload();
+      })
+      .catch(err=>{
+        console.log(err)
+        setMessage("Bạn không được quyền xóa")
+      })
   }
 
   return (
     <div className="getplace">
       <div className="container alert alert-light">
         {" "}
-        <h2>Tất cả các địa điểm</h2>
+        <h2>Tất cả các Lịch hẹn</h2>
         <br />
         <input
           id="search"
@@ -49,25 +55,62 @@ const getAllSchedule = () => {
         <table className="table">
           <thead>
             <tr>
-              <th>Phòng tập</th>
-              <th>Địa chỉ</th>
-              <th>Ảnh</th>
-              <th>Tạo mới</th>
+              <th>Tên lịch hẹn</th>
+              <th>Thời gian bắt đầu</th>
+              <th>Thời gian kết thúc</th>
+              <th>Giá</th>
+              <th>Số lượng</th>
+              <th>Địa điểm</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody id="table">
-            {adminPlace.map((place) => (
-              <tr>
-                <td>{place.name}</td>
-                <td>{place.diachi}</td>
-                <td>
-                  <Image src={place.image} alt="loading..."></Image>
-                </td>
-                <td>
-                  <Button variant="primary" onClick={handleToCreatePt}>Thêm PT</Button>{" "}
-                  <Button variant="primary" onClick={handleToCreateCourse}>Thêm Course</Button>{" "}
-                </td>
-              </tr>
+            {placeSchedule.map((placeSchedule) => (
+              <>
+                {placeSchedule.schedule.map((schedule) => (
+                  <tr>
+                    <td>{schedule.name}</td>
+                    <td>{schedule.thoigianbatdau}</td>
+                    <td>{schedule.thoigianketthuc}</td>
+                    <td>{schedule.gia}</td>
+                    <td>{schedule.soluong}</td>
+                    <td>{placeSchedule.diachi}</td>
+                    <td>
+                      <Button
+                        variant="primary"
+                        onClick={() => {
+                          setIdChedule(schedule.id);
+                          setLgShow(true);
+                          setMessage("");
+                        }}
+                      >
+                        Xóa Chedule
+                      </Button>
+                      <Modal
+                        size="lg"
+                        show={lgShow}
+                        onHide={() => setLgShow(false)}
+                        aria-labelledby="example-modal-sizes-title-lg"
+                      >
+                        <Modal.Header closeButton>
+                          <Modal.Title id="example-modal-sizes-title-lg">
+                            Bạn có muốn xóa Schedule này không
+                          </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body className="place-delete">
+                          <p>{message}</p>
+                          <Button
+                            variant="primary"
+                            onClick={handleDelete(idChedule)}
+                          >
+                            Xóa Chedule
+                          </Button>{" "}
+                        </Modal.Body>
+                      </Modal>
+                    </td>
+                  </tr>
+                ))}
+              </>
             ))}
           </tbody>
         </table>

@@ -2,11 +2,14 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { courseAPI } from "../api/course/course";
-import { Image } from "react-bootstrap";
+import { Button, Image, Modal } from "react-bootstrap";
 
 const AllCourse = () => {
   const [adminCourse, setAdminCourse] = useState([]);
+  const [lgShow, setLgShow] = useState(false);
   const [adminCoursePlace, setAdminCoursePlace] = useState();
+  const [message, setMessage] = useState("");
+  const [idCourse, setIdCourse] = useState("");
   useEffect(() => {
     courseAPI
       .getAllCourse()
@@ -17,6 +20,19 @@ const AllCourse = () => {
       })
       .catch((err) => console.log(err));
   });
+
+  const handleDelete = id => e => {
+    courseAPI.deleteCourse(id) 
+      .then(res=>{
+        // console.log(res)
+        setMessage(res.data.message)
+        window.location.reload();
+      })
+      .catch(err=>{
+        console.log(err)
+        setMessage("Bạn không được quyền xóa")
+      })
+  }
 
   return (
     <div className="getplace">
@@ -40,6 +56,7 @@ const AllCourse = () => {
               <th>Ảnh đại diện</th>
               <th>Số lượng</th>
               <th>Địa chỉ</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody id="table">
@@ -55,6 +72,39 @@ const AllCourse = () => {
                     </td>
                     <td>{courselist.soluong}</td>
                     <td>{course.diachi}</td>
+                    <td>
+                      <Button
+                        variant="primary"
+                        onClick={() => {
+                          setIdCourse(courselist.id);
+                          setLgShow(true);
+                          setMessage("");
+                        }}
+                      >
+                        Xóa Course
+                      </Button>
+                      <Modal
+                        size="lg"
+                        show={lgShow}
+                        onHide={() => setLgShow(false)}
+                        aria-labelledby="example-modal-sizes-title-lg"
+                      >
+                        <Modal.Header closeButton>
+                          <Modal.Title id="example-modal-sizes-title-lg">
+                            Bạn có muốn xóa khóa học này không
+                          </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body className="place-delete">
+                          <p>{message}</p>
+                          <Button
+                            variant="primary"
+                            onClick={handleDelete(idCourse)}
+                          >
+                            Xóa Course
+                          </Button>{" "}
+                        </Modal.Body>
+                      </Modal>
+                    </td>
                   </tr>
                 ))}
               </>
