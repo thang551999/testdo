@@ -95,7 +95,7 @@ const CreatePT = () => {
                 Choose an option
               </option>
               {selectPlace.map((place) => (
-                <option value={place.id}>{place.diachi}</option>
+                <option key={place.id} value={place.id}>{place.diachi}</option>
               ))}
             </select>
           </div>

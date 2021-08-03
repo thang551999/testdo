@@ -63,7 +63,7 @@ const AllCourse = () => {
             {adminCourse.map((course) => (
               <>
                 {course.courseList.map((courselist) => (
-                  <tr>
+                  <tr key={courselist.id}>
                     <td>{courselist.tenkhoahoc}</td>
                     <td>{courselist.noidung}</td>
                     <td>{courselist.thongtinthem}</td>

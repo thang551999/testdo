@@ -3,12 +3,9 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { placeAPI } from "../api/place/place";
 import { Button, Modal } from "react-bootstrap";
-import { useRouter } from "next/dist/client/router";
-import { Image } from "react-bootstrap";
 import { scheduleAPI } from "../api/schedule/schedule";
 
-const getAllSchedule = () => {
-  const Router = useRouter();
+const GetAllSchedule = () => {
   const [placeSchedule, setPlaceShedule] = useState([]);
   const [schedule, setSchedule] = useState([]);
   const [lgShow, setLgShow] = useState(false);
@@ -68,7 +65,7 @@ const getAllSchedule = () => {
             {placeSchedule.map((placeSchedule) => (
               <>
                 {placeSchedule.schedule.map((schedule) => (
-                  <tr>
+                  <tr key={schedule.id}>
                     <td>{schedule.name}</td>
                     <td>{schedule.thoigianbatdau}</td>
                     <td>{schedule.thoigianketthuc}</td>
@@ -119,4 +116,4 @@ const getAllSchedule = () => {
   );
 };
 
-export default getAllSchedule;
+export default GetAllSchedule;

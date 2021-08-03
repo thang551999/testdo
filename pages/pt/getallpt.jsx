@@ -63,7 +63,7 @@ const GetAllPT = () => {
           </thead>
           <tbody id="table">
             {adminPt.map((pt) => (
-              <tr>
+              <tr key={pt.id}>
                 <td>{pt.name}</td>
                 <td>{pt.ngaysinh}</td>
                 <td>{pt.sodienthoai}</td>

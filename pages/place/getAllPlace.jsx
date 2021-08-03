@@ -74,7 +74,7 @@ const GetAllPlace = () => {
           </thead>
           <tbody id="table">
             {adminPlace.map((place) => (
-              <tr>
+              <tr key={place.id}>
                 <td>{place.name}</td>
                 <td>{place.diachi}</td>
                 <td>
