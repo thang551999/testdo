@@ -13,9 +13,10 @@ const CreateCourse = () => {
     noidung: "",
     thongtinthem: "",
     soluong: "",
+    gia: "",
   };
   const [adminCourse, setAdminCourse] = useState(initCourse);
-  const { tenkhoahoc, noidung, thongtinthem, soluong } = adminCourse;
+  const { tenkhoahoc, noidung, thongtinthem, soluong, gia } = adminCourse;
   const [inputFile, setInputFile] = useState("");
   const [image, setImage] = useState("");
   const [selectPlace, setSelectPlace] = useState([]);
@@ -64,6 +65,7 @@ const CreateCourse = () => {
       soluong: soluong,
       image: image,
       place: idPlace,
+      gia: gia,
     };
 
     courseAPI
@@ -91,7 +93,9 @@ const CreateCourse = () => {
                 Choose an option
               </option>
               {selectPlace.map((place) => (
-                <option key={place.id} value={place.id}>{place.diachi}</option>
+                <option key={place.id} value={place.id}>
+                  {place.diachi}
+                </option>
               ))}
             </select>
           </div>
@@ -117,6 +121,18 @@ const CreateCourse = () => {
             type="text"
             className="profile-input"
             name="noidung"
+            onChange={handleChangeCourse}
+          />
+
+          <label htmlFor="name" className="profile-textlabel">
+            Giá
+          </label>
+          <br />
+          <input
+            id="name"
+            type="text"
+            className="profile-input"
+            name="gia"
             onChange={handleChangeCourse}
           />
 

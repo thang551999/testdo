@@ -17,7 +17,8 @@ export default function MyApp(props) {
     token = Cookies.get("token");
   });
   const Router = useRouter();
-  const hiddenLayout = Router.pathname === ("/login" || "/register") ? true : false;
+  const hiddenLayout = Router.pathname === "/login" ? true : false;
+  const hiddenLayoutRegister = Router.pathname === "/register" ? true : false;
 
   React.useEffect(() => {
     const jssStyles = document.querySelector("#jss-server-side");
@@ -35,7 +36,8 @@ export default function MyApp(props) {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-      {hiddenLayout ? (
+      {
+      hiddenLayout || hiddenLayoutRegister ? (
         <Component {...pageProps} />
       ) : (
         <Layout>

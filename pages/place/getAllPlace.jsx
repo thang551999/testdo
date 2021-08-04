@@ -17,8 +17,8 @@ const GetAllPlace = () => {
     placeAPI
       .getAllPlace()
       .then((res) => {
-        // console.log(res.data.length);
-        // setAdminPlace(res.data)
+        console.log(res.data);
+        setAdminPlace(res.data)
         initPlace.push(res.data);
         console.log(res.data);
 
@@ -78,7 +78,7 @@ const GetAllPlace = () => {
                 <td>{place.name}</td>
                 <td>{place.diachi}</td>
                 <td>
-                  <Image src={place.image} alt="loading..."></Image>
+                  <Image src={place.image} alt="loading..." className="admin-img"></Image>
                 </td>
                 <td>
                   <Button variant="primary" onClick={handleToCreatePt}>

@@ -10,15 +10,18 @@ import { useEffect } from "react";
 import { placeAPI } from "../api/place/place";
 import { uploadAPI } from "../api/upload/upload";
 import { scheduleAPI } from "../api/schedule/schedule";
+import { ptAPI } from "../api/pt/pt";
 
 const CreateSchedule = () => {
   const initSchedule = { name: "", thongtinthem: "", soluong: "", gia: "", thoigianbatdau:"", thoigianketthuc: "" };
   const [adminSchedule, setAdminSchedule] = useState(initSchedule);
   const { name, thongtinthem, soluong, gia,thoigianbatdau,thoigianketthuc } = adminSchedule;
   const [idPlace, setIdPlace] = useState("");
+  const [idPt, setIdPt] = useState("");
   const [selectPlace, setSelectPlace] = useState([]);
   const [inputFile, setInputFile] = useState();
   const [image, setImage] = useState();
+  const [selectPt, setSelectPt] = useState([]);
   const Router = useRouter();
   const [startDate, setStartDate] = useState(
     setHours(setMinutes(new Date(), 30), 17)
@@ -35,12 +38,24 @@ const CreateSchedule = () => {
         setSelectPlace(res.data);
       })
       .catch((err) => console.log(err));
-  });
+  },[]);
+
+  useEffect(()=>{
+    ptAPI.getAllPt()
+      .then(res=>{
+        console.log(res)
+        setSelectPt(res.data)
+      })
+  },[]);
 
   const handleChangePlace = (e) => {
     //   console.log(e.target.value)
     setIdPlace(e.target.value);
   };
+
+  const handleChangePt = (e) => {
+    setIdPt(e.target.value)
+  }
 
   const handleChangeSchedule = (e) => {
     const { name, value } = e.target;
@@ -67,6 +82,7 @@ const CreateSchedule = () => {
     const body = {
       name: name,
       place: idPlace,
+      pt: idPt,
       image: image,
       thongtinthem: thongtinthem,
       soluong: soluong,
@@ -90,13 +106,31 @@ const CreateSchedule = () => {
 
         <div className="profile-gird-name">
           <label htmlFor="name" className="profile-textlabel">
-            Địa điểm
+            Chọn PT
           </label>
           <br />
 
           <div className="pt-select">
             <select
               name="place"
+              className="pt-select-place"
+              onChange={handleChangePt}
+            >
+              <option selected disabled>
+                Choose an option
+              </option>
+              {selectPt.map((pt) => (
+                <option key={pt.id} value={pt.id}>{pt.name}</option>
+              ))}
+            </select>
+          </div>
+          <label htmlFor="name" className="profile-textlabel">
+            Chọn địa điểm
+          </label>
+          <br />
+          <div className="pt-select">
+          <select
+              name="pt"
               className="pt-select-place"
               onChange={handleChangePlace}
             >

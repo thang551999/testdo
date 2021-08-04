@@ -68,7 +68,7 @@ const AllCourse = () => {
                     <td>{courselist.noidung}</td>
                     <td>{courselist.thongtinthem}</td>
                     <td>
-                      <Image src={courselist.image}></Image>
+                      <Image src={courselist.image} className="admin-img"></Image>
                     </td>
                     <td>{courselist.soluong}</td>
                     <td>{course.diachi}</td>

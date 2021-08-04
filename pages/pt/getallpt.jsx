@@ -68,7 +68,7 @@ const GetAllPT = () => {
                 <td>{pt.ngaysinh}</td>
                 <td>{pt.sodienthoai}</td>
                 <td>
-                  <Image src={pt.image} alt="loading..."></Image>
+                  <Image src={pt.image} alt="loading..." className="admin-img"></Image>
                 </td>
                 <td>{pt.thongtinthem}</td>
                 <td>
