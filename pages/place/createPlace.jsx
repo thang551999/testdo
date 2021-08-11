@@ -4,15 +4,16 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { placeAPI } from "../api/place/place";
 import { uploadAPI } from "../api/upload/upload";
-import { Image } from "react-bootstrap";
+import { Form, Image } from "react-bootstrap";
 
 const CreatePlace = () => {
   const Router = useRouter();
-  const initPlace = { name: "", diachi: "", thongtinthem: "" };
+  const initPlace = { name: "", diachi: "", thongtinthem: ""};
   const [adminPlace, setAdminPlace] = useState(initPlace);
   const { name, diachi, thongtinthem } = adminPlace;
-  const [inputImage,setInputImage] = useState();
+  const [inputImage, setInputImage] = useState();
   const [image, setImage] = useState("");
+  const [status, setStatus] = useState("0")
 
   const handleChangePlace = (e) => {
     const { name, value } = e.target;
@@ -21,25 +22,27 @@ const CreatePlace = () => {
 
   const handleChangeImage = (e) => {
     // console.log(e.target.files[0])
-    setInputImage(e.target.files[0])
-  }
+    setInputImage(e.target.files[0]);
+  };
 
-  useEffect(()=>{
-    uploadAPI.uploadAvatarAPI(inputImage)
-      .then(res => {
+  useEffect(() => {
+    uploadAPI
+      .uploadAvatarAPI(inputImage)
+      .then((res) => {
         // console.log(res.data.link)
-        setImage(res.data.link)
+        setImage(res.data.link);
       })
-      .catch(err => console.log(err))
-  },[inputImage])
+      .catch((err) => console.log(err));
+  }, [inputImage]);
 
   const handleCreatePlace = (e) => {
     e.preventDefault();
     const body = {
-      "name": name,
-      "diachi": diachi,
-      "image": image,
-      "thongtinthem": thongtinthem
+      name: name,
+      diachi: diachi,
+      image: image,
+      thongtinthem: thongtinthem,
+      status: status
     };
     placeAPI
       .createPlace(body)
@@ -50,6 +53,14 @@ const CreatePlace = () => {
       .catch((err) => console.log(err));
   };
 
+  const handleChangeStatus = (e) => {
+    if(status==="0"){
+      setStatus("1")
+    }else{
+      setStatus("0")
+    }
+  }
+
   return (
     <div className="profiles">
       <div className="container">
@@ -57,7 +68,7 @@ const CreatePlace = () => {
 
         <div className="profile-gird-name">
           <label htmlFor="name" className="profile-textlabel">
-            Tên địa chỉ
+            Phòng Tập
           </label>
           <br />
           <input
@@ -91,7 +102,8 @@ const CreatePlace = () => {
             name="image"
             onChange={handleChangeImage}
           />
-          <Image src={image} alt="loading..."></Image><br />
+          <Image src={image} alt="loading..."></Image>
+          <br />
 
           <label htmlFor="name" className="profile-textlabel">
             Thông tin thêm
@@ -104,6 +116,10 @@ const CreatePlace = () => {
             name="thongtinthem"
             onChange={handleChangePlace}
           />
+          <label htmlFor="name" className="profile-textlabel">
+            Status
+          </label>
+          <Form.Check aria-label="option 1" name="status" onClick={handleChangeStatus}/>
         </div>
         <div className="button-container">
           <button className="profile-button" onClick={handleCreatePlace}>

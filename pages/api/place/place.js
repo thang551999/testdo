@@ -7,6 +7,7 @@ export const placeAPI = {
   getAllPlace,
   createPlace,
   deletePlace,
+  updataStatus,
 };
 
 function getAllPlace() {
@@ -31,4 +32,12 @@ function deletePlace(id) {
       Authorization: `Bearer ${token}`,
     },
   });
+}
+
+function updataStatus(body){
+  return axios.post("http://18.216.251.104:5000/api/admin/updateStatus",body,{
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
 }

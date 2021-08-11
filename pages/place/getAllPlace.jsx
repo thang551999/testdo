@@ -11,17 +11,18 @@ const GetAllPlace = () => {
   const [idPlace, setIdPlace] = useState("");
   const [message, setMessage] = useState("");
   const [lgShow, setLgShow] = useState(false);
+  const [status, setStatus] = useState("");
   var initPlace = [];
   const [adminPlace, setAdminPlace] = useState([]);
+  const [updataStatus, setUpdateStatus] = useState("");
   useEffect(() => {
     placeAPI
       .getAllPlace()
       .then((res) => {
         console.log(res.data);
-        setAdminPlace(res.data)
+        setAdminPlace(res.data);
         initPlace.push(res.data);
         console.log(res.data);
-
         console.log(initPlace[0][1].name);
         setAdminPlace(initPlace[0]);
       })
@@ -37,17 +38,47 @@ const GetAllPlace = () => {
     Router.replace("/course/createCourse");
   };
 
-  const handleDelete = id => e => {
-    placeAPI.deletePlace(id) 
-      .then(res=>{
+  const handleDelete = (id) => (e) => {
+    placeAPI
+      .deletePlace(id)
+      .then((res) => {
         // console.log(res)
-        setMessage(res.data.message)
-        Router.replace("/place/getAllPlace")
+        setMessage(res.data.message);
+        Router.replace("/place/getAllPlace");
       })
-      .catch(err=>{
-        console.log(err)
-        setMessage("Bạn không được quyền xóa")
+      .catch((err) => {
+        console.log(err);
+        setMessage("Bạn không được quyền xóa");
+      });
+  };
+  const handleUpdateStatus = (id) => (e) => {
+    const body = {
+      update: "1",
+      place: id,
+    };
+    console.log(body);
+    placeAPI
+      .updataStatus(body)
+      .then((res) => {
+        console.log(res);
+        window.location.reload()
       })
+      .catch((err) => console.log(err));
+  };
+
+  const handleUpdateStatusShow = (id) => (e) => {
+    const body = {
+      update: "0",
+      place: id,
+    };
+    console.log(body);
+    placeAPI
+      .updataStatus(body)
+      .then((res) => {
+        console.log(res);
+        window.location.reload()
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -69,6 +100,7 @@ const GetAllPlace = () => {
               <th>Tên</th>
               <th>Địa chỉ</th>
               <th>Ảnh</th>
+              <th>Status</th>
               <th>Tạo mới</th>
             </tr>
           </thead>
@@ -78,7 +110,28 @@ const GetAllPlace = () => {
                 <td>{place.name}</td>
                 <td>{place.diachi}</td>
                 <td>
-                  <Image src={place.image} alt="loading..." className="admin-img"></Image>
+                  <Image
+                    src={place.image}
+                    alt="loading..."
+                    className="admin-img"
+                  ></Image>
+                </td>
+                <td>
+                  {place.status === "0" ? (
+                    <Button
+                      variant="primary"
+                      onClick={handleUpdateStatus(place.id)}
+                    >
+                      Ẩn
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="primary"
+                      onClick={handleUpdateStatusShow(place.id)}
+                    >
+                      Hiển Thị
+                    </Button>
+                  )}
                 </td>
                 <td>
                   <Button variant="primary" onClick={handleToCreatePt}>
