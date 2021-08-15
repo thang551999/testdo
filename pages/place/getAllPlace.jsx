@@ -116,7 +116,7 @@ const GetAllPlace = () => {
                     className="admin-img"
                   ></Image>
                 </td>
-                <td>
+                <td  style={{width: "11%"}}>
                   {place.status === "0" ? (
                     <Button
                       variant="primary"
@@ -133,7 +133,7 @@ const GetAllPlace = () => {
                     </Button>
                   )}
                 </td>
-                <td>
+                <td style={{width: "35%"}}>
                   <Button variant="primary" onClick={handleToCreatePt}>
                     Thêm PT
                   </Button>{" "}

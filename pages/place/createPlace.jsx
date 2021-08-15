@@ -5,15 +5,26 @@ import { useState } from "react";
 import { placeAPI } from "../api/place/place";
 import { uploadAPI } from "../api/upload/upload";
 import { Form, Image } from "react-bootstrap";
+import { searchAPI } from "../api/search/search";
 
 const CreatePlace = () => {
   const Router = useRouter();
-  const initPlace = { name: "", diachi: "", thongtinthem: ""};
+  const initPlace = { name: "", diachi: "", thongtinthem: "" };
   const [adminPlace, setAdminPlace] = useState(initPlace);
   const { name, diachi, thongtinthem } = adminPlace;
   const [inputImage, setInputImage] = useState();
   const [image, setImage] = useState("");
-  const [status, setStatus] = useState("0")
+  const [status, setStatus] = useState("0");
+  const [tinh, setTinh] = useState([]);
+  const [idTinh, setIdTinh] = useState("");
+  const [nameTinh, setNameTinh] = useState("");
+  const [huyen, setHuyen] = useState([]);
+  const [idHuyen, setIdHuyen] = useState("");
+  const [nameHuyen, setNameHuyen] = useState("");
+  const [xa, setXa] = useState([]);
+  const [idXa, setIdXa] = useState("");
+  const [nameXa, setNameXa] = useState("");
+  const [search, setSearch] = useState("");
 
   const handleChangePlace = (e) => {
     const { name, value } = e.target;
@@ -35,31 +46,106 @@ const CreatePlace = () => {
       .catch((err) => console.log(err));
   }, [inputImage]);
 
+  const handleChangeStatus = (e) => {
+    if (status === "0") {
+      setStatus("1");
+    } else {
+      setStatus("0");
+    }
+  };
+
+  useEffect(()=>{
+    searchAPI.getTinh()
+      .then(res=>{
+        // console.log(res)
+        setTinh(res.data.results)
+      })
+      .catch(err=>console.log(err))
+  },[])
+
+  const handleChangeTinh = (e) => {
+    // console.log(e.target.value)
+    setIdTinh(e.target.value)
+  }
+
+  useEffect(()=>{
+    searchAPI.getHuyen(idTinh)
+      .then(res=>{
+        setHuyen(res.data.results)
+      })
+      .catch(err=>console.log(err))
+
+    searchAPI.getTinhById(idTinh)
+      .then(res=>{
+        // console.log(res)
+        setNameTinh(res.data.name)
+      })
+      .catch(err=>console.log(err))
+  },[idTinh])
+
+  const handleChangeHuyen = (e) =>{
+    setIdHuyen(e.target.value)
+  }
+
+  useEffect(()=>{
+    searchAPI.getXa(idHuyen)
+      .then(res=>{
+        setXa(res.data.results)
+      })
+      .catch(err=>console.log(err))
+
+    searchAPI.getHuyenById(idHuyen)
+      .then(res=>{
+        // console.log(res)
+        setNameHuyen(res.data.name)
+      })
+      .catch(err=>console.log(err))
+  },[idHuyen])
+
+  const handleChangeXa = (e) => {
+    setIdXa(e.target.value)
+  }
+
+  useEffect(()=>{
+    searchAPI.getXaById(idXa)
+      .then(res=>{
+        // console.log(res)
+        setNameXa(res.data.name)
+      })
+      .catch(err=>console.log(err))
+  },[idXa])
+
+  useEffect(()=>{
+    if(nameXa==null){
+      setNameXa("");
+    }
+    if(nameHuyen==null){
+      setNameHuyen("");
+    }
+    if(nameTinh==null){
+      setNameTinh("");
+    }
+    // console.log(diachi + " " + nameXa+ " "+ nameHuyen + " " +nameTinh)
+    setSearch(diachi + " " + nameXa+ " "+ nameHuyen + " " +nameTinh)
+  },[nameTinh, nameHuyen, nameXa, diachi])
+
   const handleCreatePlace = (e) => {
     e.preventDefault();
     const body = {
       name: name,
-      diachi: diachi,
+      diachi: search,
       image: image,
       thongtinthem: thongtinthem,
-      status: status
+      status: status,
     };
     placeAPI
       .createPlace(body)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         Router.replace("/place/getAllPlace");
       })
       .catch((err) => console.log(err));
   };
-
-  const handleChangeStatus = (e) => {
-    if(status==="0"){
-      setStatus("1")
-    }else{
-      setStatus("0")
-    }
-  }
 
   return (
     <div className="profiles">
@@ -68,7 +154,7 @@ const CreatePlace = () => {
 
         <div className="profile-gird-name">
           <label htmlFor="name" className="profile-textlabel">
-            Phòng Tập
+            Tên Phòng Tập
           </label>
           <br />
           <input
@@ -83,6 +169,60 @@ const CreatePlace = () => {
             Địa chỉ
           </label>
           <br />
+
+          <div className="search-by-place">
+            <div className="place-tinh">
+              <select
+                name="tinh"
+                className="checkin-select-place"
+                onChange={handleChangeTinh}
+              >
+                <option selected disabled>
+                  Chọn 1 Tỉnh/Thành Phố
+                </option>
+                {tinh.map((tinh) => (
+                  <option key={tinh.province_id} value={tinh.province_id}>
+                    {tinh.province_name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="place-huyen">
+              <select
+                name="huyen"
+                className="checkin-select-place"
+                onChange={handleChangeHuyen}
+              >
+                <option selected disabled>
+                  Chọn 1 Huyện
+                </option>
+                {huyen.map((huyen) => (
+                  <option key={huyen.district_id} value={huyen.district_id}>
+                    {huyen.district_name}
+                  </option>
+                ))}
+              </select>
+
+              <div className="place-xa">
+                <select
+                  name="xa"
+                  className="checkin-select-place"
+                  onChange={handleChangeXa}
+                >
+                  <option selected disabled>
+                    Chọn 1 Xã
+                  </option>
+                  {xa.map((xa) => (
+                    <option key={xa.ward_id} value={xa.ward_id}>
+                      {xa.ward_name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          </div>
+
           <input
             id="name"
             type="text"
@@ -119,7 +259,11 @@ const CreatePlace = () => {
           <label htmlFor="name" className="profile-textlabel">
             Status
           </label>
-          <Form.Check aria-label="option 1" name="status" onClick={handleChangeStatus}/>
+          <Form.Check
+            aria-label="option 1"
+            name="status"
+            onClick={handleChangeStatus}
+          />
         </div>
         <div className="button-container">
           <button className="profile-button" onClick={handleCreatePlace}>

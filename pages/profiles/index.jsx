@@ -9,15 +9,15 @@ import axios from "axios";
 const Profiles = () => {
   const inforadmin = { name: "", phonenumber: "", place: "" };
   const [adminData, setAdminData] = useState(inforadmin);
-  const token = Cookies.get("token");
+ 
   useEffect(() => {
     profilesAPI.getProfiles()
       .then((res) => {
-        // console.log(res);
-        setAdminData(res.data)
+        console.log(res.data.admin);
+        setAdminData(res.data.admin)
       })
       .catch((err) => console.log(err));
-  });
+  },[]);
   return (
     <div className="profiles">
       <div className="container">
