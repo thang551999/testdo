@@ -66,13 +66,31 @@ function Layout(props) {
               </li>
               <li className="nav-list-item">
                 <Link
+                  href="/spa"
+                  className="nav-list-item-link"
+                  id="nav-item-orders"
+                >
+                  Chăm sóc sức khỏe
+                </Link>
+              </li>
+              <li className="nav-list-item">
+                <Link
+                  href="/service/createService"
+                  className="nav-list-item-link"
+                  id="nav-item-orders"
+                >
+                  Tạo dịch vụ 
+                </Link>
+              </li>
+              {/* <li className="nav-list-item">
+                <Link
                   href="/checkin"
                   className="nav-list-item-link"
                   id="nav-item-orders"
                 >
                   Check In
                 </Link>
-              </li>
+              </li> */}
             </ol>
           </div>
         </div>

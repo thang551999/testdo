@@ -1,17 +1,17 @@
 import React from "react";
 import { Link } from "@material-ui/core";
 
-const Schedule = () => {
+const Spa = () => {
   return (
     <div className="menu-pt">
       <header className="header-pt">
         <nav className="site-nav">
           <ul>
             <li>
-              <Link href="/schedule/getAllSchedule">Danh sách lịch hẹn</Link>
+              <Link href="/spa/getAllSpa">Danh sách Cơ sở chăm sóc sức khỏe</Link>
             </li>
             <li>
-              <Link href="/schedule/createSchedule">Tạo lịch hẹn mới</Link>
+              <Link href="/spa/createSpa">Tạo Cơ sở chăm sóc sức khỏe</Link>
             </li>
           </ul>
         </nav>
@@ -20,4 +20,4 @@ const Schedule = () => {
   );
 };
 
-export default Schedule;
+export default Spa;
