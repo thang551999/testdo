@@ -1,58 +1,55 @@
-import { Router } from "@material-ui/icons";
 import { useRouter } from "next/router";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Button, Modal, Image } from "react-bootstrap";
-import { spaAPI } from "../api/spa/spa";
+import { Button, Image } from "react-bootstrap";
+import { sportAPI } from "../api/sport/sport";
 
-const GetAllSpa = () => {
-  const [adminSpa, setAdminSpa] = useState([]);
+const GetAllSport = () => {
   const Router = useRouter();
+  const [adminSport, setAdminSport] = useState([]);
+
   useEffect(() => {
-    spaAPI
-      .getAllSpa()
+    sportAPI
+      .getSport()
       .then((res) => {
         // console.log(res);
-        setAdminSpa(res.data);
+        setAdminSport(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
 
-  const handleCreateService = (e) => {
-      e.preventDefault();
-      Router.push("/service/createService");
-  }
-
-  const handleUpdateStatusSpa = (id) => (e) => {
+  const handleUpdateStatusSport = (id) => (e) => {
     const body = {
+      sport: id,
       update: "1",
-      spa: id,
     };
-    console.log(body);
-    spaAPI
-      .updateStatusSpa(body)
+    sportAPI
+      .updateStatusSport(body)
       .then((res) => {
         console.log(res);
-        window.location.reload()
+        window.location.reload();
       })
       .catch((err) => console.log(err));
-  }
+  };
 
-  const handleUpdateStatusSpaHide = (id) => (e) => {
+  const handleUpdateStatusSportHide = (id) => (e) => {
     const body = {
+      sport: id,
       update: "0",
-      spa: id,
     };
-    console.log(body);
-    spaAPI
-      .updateStatusSpa(body)
+    sportAPI
+      .updateStatusSport(body)
       .then((res) => {
         console.log(res);
-        window.location.reload()
+        window.location.reload();
       })
       .catch((err) => console.log(err));
-  }
+  };
+
+  const handleCreateService = (e) => {
+    Router.push("/serviceSport/createServiceSport");
+  };
 
   return (
     <div className="getall-spa">
@@ -79,34 +76,38 @@ const GetAllSpa = () => {
               </tr>
             </thead>
             <tbody id="table">
-              {adminSpa.map((spa) => (
-                <tr key={spa.id}>
-                  <td>{spa.name}</td>
-                  <td>{spa.diachi}</td>
-                  <td style={{width: "25%"}}>
-                    <Image src={spa.image} alt="Loading..." style={{width: "100%"}}/>
+              {adminSport.map((sport) => (
+                <tr key={sport.id}>
+                  <td>{sport.name}</td>
+                  <td>{sport.diachi}</td>
+                  <td style={{ width: "25%" }}>
+                    <Image
+                      src={sport.image}
+                      alt="Loading..."
+                      style={{ width: "100%" }}
+                    />
                   </td>
                   <td>
-                    {spa.status == "0" ? (
+                    {sport.status == "0" ? (
                       <Button
                         variant="primary"
-                          onClick={handleUpdateStatusSpa(spa.id)}
+                        onClick={handleUpdateStatusSport(sport.id)}
                       >
                         Ẩn
                       </Button>
                     ) : (
                       <Button
                         variant="primary"
-                          onClick={handleUpdateStatusSpaHide(spa.id)}
+                        onClick={handleUpdateStatusSportHide(sport.id)}
                       >
                         Hiển Thị
                       </Button>
                     )}
                   </td>
                   <td>
-                  <Button variant="primary" onClick={handleCreateService}>
-                    Thêm dịch vụ
-                  </Button>{" "}
+                    <Button variant="primary" onClick={handleCreateService}>
+                      Thêm dịch vụ
+                    </Button>{" "}
                   </td>
                 </tr>
               ))}
@@ -118,4 +119,4 @@ const GetAllSpa = () => {
   );
 };
 
-export default GetAllSpa;
+export default GetAllSport;

@@ -37,7 +37,7 @@ function Layout(props) {
                   Place
                 </Link>
               </li>
-              <li className="nav-list-item">
+              <li className="nav-list-item" style={{ marginLeft: "10%" }}>
                 <Link
                   href="/pt"
                   className="nav-list-item-link"
@@ -46,7 +46,7 @@ function Layout(props) {
                   PT
                 </Link>
               </li>
-              <li className="nav-list-item">
+              <li className="nav-list-item" style={{ marginLeft: "10%" }}>
                 <Link
                   href="/course"
                   className="nav-list-item-link"
@@ -55,7 +55,7 @@ function Layout(props) {
                   Course
                 </Link>
               </li>
-              <li className="nav-list-item">
+              <li className="nav-list-item" style={{ marginLeft: "10%" }}>
                 <Link
                   href="/schedule"
                   className="nav-list-item-link"
@@ -73,13 +73,40 @@ function Layout(props) {
                   Chăm sóc sức khỏe
                 </Link>
               </li>
-              <li className="nav-list-item">
+              <li className="nav-list-item" style={{ marginLeft: "10%" }}>
                 <Link
-                  href="/service/createService"
+                  href="/serviceSpa"
                   className="nav-list-item-link"
                   id="nav-item-orders"
                 >
-                  Tạo dịch vụ 
+                  Dịch vụ
+                </Link>
+              </li>
+              <li className="nav-list-item">
+                <Link
+                  href="/"
+                  className="nav-list-item-link"
+                  id="nav-item-orders"
+                >
+                  Tập luyện online
+                </Link>
+              </li>
+              <li className="nav-list-item">
+                <Link
+                  href="/sport"
+                  className="nav-list-item-link"
+                  id="nav-item-orders"
+                >
+                  Thể thao giải trí
+                </Link>
+              </li>
+              <li className="nav-list-item" style={{ marginLeft: "10%" }}>
+                <Link
+                  href="/serviceSport"
+                  className="nav-list-item-link"
+                  id="nav-item-orders"
+                >
+                  Dịch vụ giải trí
                 </Link>
               </li>
               {/* <li className="nav-list-item">

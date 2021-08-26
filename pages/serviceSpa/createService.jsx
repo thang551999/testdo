@@ -1,4 +1,5 @@
 import { ServerStyleSheets } from "@material-ui/core";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { Image } from "react-bootstrap";
@@ -7,6 +8,7 @@ import { spaAPI } from "../api/spa/spa";
 import { uploadAPI } from "../api/upload/upload";
 
 const CreateService = () => {
+  const Router = useRouter();
   const [selectSpa, setSelectSpa] = useState([]);
   const [idSpa, setIdSpa] = useState("");
   const initService = { name: "", noidung: "", thongtinthem: "", gia: "" };
@@ -63,7 +65,8 @@ const CreateService = () => {
     serviceAPI
       .createService(body)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
+        Router.push("/serviceSpa/getAllService")
       })
       .catch((err) => console.log(err));
   };
@@ -131,7 +134,7 @@ const CreateService = () => {
                 name="image"
                 onChange={handleChangeImage}
               />
-              <Image src="" alt="loading..."></Image>
+              <Image src={image} alt="loading..."></Image>
               <br />
 
               <label htmlFor="name" className="profile-textlabel">
