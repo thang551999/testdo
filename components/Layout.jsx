@@ -57,6 +57,15 @@ function Layout(props) {
               </li>
               <li className="nav-list-item" style={{ marginLeft: "10%" }}>
                 <Link
+                  href="/courseOnline"
+                  className="nav-list-item-link"
+                  id="nav-item-orders"
+                >
+                  Course Online
+                </Link>
+              </li>
+              <li className="nav-list-item" style={{ marginLeft: "10%" }}>
+                <Link
                   href="/schedule"
                   className="nav-list-item-link"
                   id="nav-item-orders"
@@ -80,15 +89,6 @@ function Layout(props) {
                   id="nav-item-orders"
                 >
                   Dịch vụ
-                </Link>
-              </li>
-              <li className="nav-list-item">
-                <Link
-                  href="/"
-                  className="nav-list-item-link"
-                  id="nav-item-orders"
-                >
-                  Tập luyện online
                 </Link>
               </li>
               <li className="nav-list-item">
