@@ -30,6 +30,14 @@ function Layout(props) {
               </li>
               <li className="nav-list-item">
                 <Link
+                  href="/userandcoin"
+                  className="nav-list-item-link"
+                >
+                  Quản lý user và coin
+                </Link>
+              </li>
+              <li className="nav-list-item">
+                <Link
                   href="/place"
                   className="nav-list-item-link"
                   id="nav-item-orders"
