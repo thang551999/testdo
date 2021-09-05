@@ -43,8 +43,8 @@ const GetAllServiceSport = () => {
               <>
                 {serviceSport.dichvu.map((dichvu) => (
                   <tr key={dichvu.id}>
-                    <td>{dichvu.name}</td>
-                    <td>{dichvu.noidung}</td>
+                    <td>{dichvu.tendichvu}</td>
+                    <td style={{whiteSpace: "pre-wrap"}}>{dichvu.noidung}</td>
                     <td style={{width:"25%"}}>
                         <Image src={dichvu.image} alt="loading..." style={{width: "100%"}}/>
                     </td>

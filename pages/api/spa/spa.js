@@ -5,12 +5,21 @@ export const spaAPI = {
   createSpa,
   getAllSpa,
   updateStatusSpa,
+  deleteSpa,
 };
 
 const token = Cookies.get("token");
 
 function createSpa(body) {
   return axios.post("http://18.216.251.104:5000/api/admin/createspa", body, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+function deleteSpa(id) {
+  return axios.get("http://18.216.251.104:5000/api/admin/delspa/"+id, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

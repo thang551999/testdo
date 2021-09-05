@@ -2,12 +2,14 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Button, Image } from "react-bootstrap";
+import { Button, Image, Modal } from "react-bootstrap";
 import { sportAPI } from "../api/sport/sport";
 
 const GetAllSport = () => {
   const Router = useRouter();
   const [adminSport, setAdminSport] = useState([]);
+  const [lgShow, setLgShow] = useState(false);
+  const [idSport, setIdSport] = useState("");
 
   useEffect(() => {
     sportAPI
@@ -49,6 +51,15 @@ const GetAllSport = () => {
 
   const handleCreateService = (e) => {
     Router.push("/serviceSport/createServiceSport");
+  };
+
+  const handleDelete = (id) => (e) => {
+    sportAPI
+      .deleteSport(id)
+      .then((res) => {
+        window.location.reload();
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -108,6 +119,38 @@ const GetAllSport = () => {
                     <Button variant="primary" onClick={handleCreateService}>
                       Thêm dịch vụ
                     </Button>{" "}
+                    <Button variant="primary" onClick={handleCreateService}>
+                      Thêm dịch vụ
+                    </Button>{" "}
+                    <Button
+                      variant="primary"
+                      onClick={() => {
+                        setIdSport(sport.id);
+                        setLgShow(true);
+                      }}
+                    >
+                      Xóa Sport
+                    </Button>
+                    <Modal
+                      size="lg"
+                      show={lgShow}
+                      onHide={() => setLgShow(false)}
+                      aria-labelledby="example-modal-sizes-title-lg"
+                    >
+                      <Modal.Header closeButton>
+                        <Modal.Title id="example-modal-sizes-title-lg">
+                          Bạn có muốn xóa Sport này không
+                        </Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body className="place-delete">
+                        <Button
+                          variant="primary"
+                          onClick={handleDelete(idSport)}
+                        >
+                          Xóa Sport
+                        </Button>{" "}
+                      </Modal.Body>
+                    </Modal>
                   </td>
                 </tr>
               ))}

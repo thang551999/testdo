@@ -66,7 +66,7 @@ const CreateService = () => {
       .createService(body)
       .then((res) => {
         // console.log(res);
-        Router.push("/serviceSpa/getAllService")
+        Router.push("/serviceSpa/getAllService");
       })
       .catch((err) => console.log(err));
   };
@@ -115,13 +115,12 @@ const CreateService = () => {
                 Nội dung
               </label>
               <br />
-              <input
+              <textarea
                 id="name"
-                type="text"
                 className="profile-input"
                 name="noidung"
                 onChange={handleChangeService}
-              />
+              ></textarea>
 
               <label htmlFor="name" className="profile-textlabel">
                 Image
@@ -141,13 +140,12 @@ const CreateService = () => {
                 Thông tin thêm
               </label>
               <br />
-              <input
+              <textarea
                 id="name"
-                type="text"
                 className="profile-input"
                 name="thongtinthem"
                 onChange={handleChangeService}
-              />
+              ></textarea>
 
               <label htmlFor="name" className="profile-textlabel">
                 Giá

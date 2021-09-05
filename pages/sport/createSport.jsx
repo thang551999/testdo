@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Form, Image } from "react-bootstrap";
@@ -22,6 +23,7 @@ const CreateSport = () => {
   const [image, setImage] = useState("");
   const [inputImage, setInputImage] = useState("");
   const [status, setStatus] = useState("0");
+  const Router = useRouter();
 
   useEffect(() => {
     searchAPI
@@ -145,6 +147,7 @@ const CreateSport = () => {
       .createSport(body)
       .then((res) => {
         console.log(res);
+        Router.push("/sport/getAllSport");
       })
       .catch((err) => console.log(err));
   };
@@ -252,13 +255,12 @@ const CreateSport = () => {
               Thông tin thêm
             </label>
             <br />
-            <input
+            <textarea
               id="name"
-              type="text"
               className="profile-input"
               name="thongtinthem"
               onChange={handleChangeSport}
-            />
+            ></textarea>
 
             <label htmlFor="name" className="profile-textlabel">
               Số điện thoại

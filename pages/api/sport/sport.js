@@ -6,12 +6,21 @@ export const sportAPI = {
   createSport,
   createSportPlace,
   updateStatusSport,
+  deleteSport,
 };
 
 const token = Cookies.get("token");
 
 function getSport() {
   return axios.get("http://18.216.251.104:5000/api/admin/getsport", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+function deleteSport(id) {
+  return axios.get("http://18.216.251.104:5000/api/admin/delsport/" + id, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

@@ -70,7 +70,7 @@ const GetAllPT = () => {
                 <td>
                   <Image src={pt.image} alt="loading..." className="admin-img"></Image>
                 </td>
-                <td>{pt.thongtinthem}</td>
+                <td  style={{whiteSpace: "pre-wrap"}}>{pt.thongtinthem}</td>
                 <td>
                   <Button
                     variant="primary"

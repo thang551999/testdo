@@ -65,8 +65,8 @@ const AllCourse = () => {
                 {course.courseList.map((courselist) => (
                   <tr key={courselist.id}>
                     <td>{courselist.tenkhoahoc}</td>
-                    <td>{courselist.noidung}</td>
-                    <td>{courselist.thongtinthem}</td>
+                    <td style={{whiteSpace: "pre-wrap"}}>{courselist.noidung}</td>
+                    <td style={{whiteSpace: "pre-wrap"}}>{courselist.thongtinthem}</td>
                     <td>
                       <Image src={courselist.image} className="admin-img"></Image>
                     </td>

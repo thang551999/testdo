@@ -29,10 +29,7 @@ function Layout(props) {
                 </Link>
               </li>
               <li className="nav-list-item">
-                <Link
-                  href="/userandcoin"
-                  className="nav-list-item-link"
-                >
+                <Link href="/userandcoin" className="nav-list-item-link">
                   Quản lý user và coin
                 </Link>
               </li>
@@ -63,7 +60,7 @@ function Layout(props) {
                   Course
                 </Link>
               </li>
-              <li className="nav-list-item" style={{ marginLeft: "10%" }}>
+              {/* <li className="nav-list-item" style={{ marginLeft: "10%" }}>
                 <Link
                   href="/courseOnline"
                   className="nav-list-item-link"
@@ -71,7 +68,7 @@ function Layout(props) {
                 >
                   Course Online
                 </Link>
-              </li>
+              </li> */}
               <li className="nav-list-item" style={{ marginLeft: "10%" }}>
                 <Link
                   href="/schedule"
@@ -79,6 +76,15 @@ function Layout(props) {
                   id="nav-item-orders"
                 >
                   Schedule
+                </Link>
+              </li>
+              <li className="nav-list-item">
+                <Link
+                  href="/online"
+                  className="nav-list-item-link"
+                  id="nav-item-orders"
+                >
+                  Khóa học online
                 </Link>
               </li>
               <li className="nav-list-item">

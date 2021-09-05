@@ -254,13 +254,12 @@ const CreateSpa = () => {
               Thông tin thêm
             </label>
             <br />
-            <input
-              id="name"
-              type="text"
-              className="profile-input"
+            <textarea
               name="thongtinthem"
+              id="name"
+              className="profile-input"
               onChange={handleChangeSpa}
-            />
+            ></textarea>
 
             <label htmlFor="name" className="profile-textlabel">
               Số điện thoại

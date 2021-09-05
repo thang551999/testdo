@@ -154,13 +154,12 @@ const CreatePT = () => {
             Thông tin thêm
           </label>
           <br />
-          <input
+          <textarea
             id="name"
-            type="text"
             className="profile-input"
             onChange={handleChangePt}
             name="thongtinthem"
-          />
+          ></textarea>
 
           {/* <label htmlFor="name" className="profile-textlabel">
             Địa điểm

@@ -9,6 +9,9 @@ import { spaAPI } from "../api/spa/spa";
 const GetAllSpa = () => {
   const [adminSpa, setAdminSpa] = useState([]);
   const Router = useRouter();
+  const [lgShow, setLgShow] = useState(false);
+  const [idSpa, setIdSpa] = useState("");
+
   useEffect(() => {
     spaAPI
       .getAllSpa()
@@ -20,9 +23,9 @@ const GetAllSpa = () => {
   }, []);
 
   const handleCreateService = (e) => {
-      e.preventDefault();
-      Router.push("/service/createService");
-  }
+    e.preventDefault();
+    Router.push("/service/createService");
+  };
 
   const handleUpdateStatusSpa = (id) => (e) => {
     const body = {
@@ -34,10 +37,10 @@ const GetAllSpa = () => {
       .updateStatusSpa(body)
       .then((res) => {
         console.log(res);
-        window.location.reload()
+        window.location.reload();
       })
       .catch((err) => console.log(err));
-  }
+  };
 
   const handleUpdateStatusSpaHide = (id) => (e) => {
     const body = {
@@ -49,10 +52,20 @@ const GetAllSpa = () => {
       .updateStatusSpa(body)
       .then((res) => {
         console.log(res);
-        window.location.reload()
+        window.location.reload();
       })
       .catch((err) => console.log(err));
-  }
+  };
+
+  const handleDelete = (id) => (e) => {
+    console.log(id)
+    spaAPI
+      .deleteSpa(id)
+      .then((res) => {
+        window.location.reload();
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="getall-spa">
@@ -82,31 +95,64 @@ const GetAllSpa = () => {
               {adminSpa.map((spa) => (
                 <tr key={spa.id}>
                   <td>{spa.name}</td>
-                  <td>{spa.diachi}</td>
-                  <td style={{width: "25%"}}>
-                    <Image src={spa.image} alt="Loading..." style={{width: "100%"}}/>
+                  <td style={{ whiteSpace: "pre-wrap" }}>{spa.thongtinthem}</td>
+                  <td style={{ width: "25%" }}>
+                    <Image
+                      src={spa.image}
+                      alt="Loading..."
+                      style={{ width: "100%" }}
+                    />
                   </td>
                   <td>
                     {spa.status == "0" ? (
                       <Button
                         variant="primary"
-                          onClick={handleUpdateStatusSpa(spa.id)}
+                        onClick={handleUpdateStatusSpa(spa.id)}
                       >
                         Ẩn
                       </Button>
                     ) : (
                       <Button
                         variant="primary"
-                          onClick={handleUpdateStatusSpaHide(spa.id)}
+                        onClick={handleUpdateStatusSpaHide(spa.id)}
                       >
                         Hiển Thị
                       </Button>
                     )}
                   </td>
                   <td>
-                  <Button variant="primary" onClick={handleCreateService}>
-                    Thêm dịch vụ
-                  </Button>{" "}
+                    <Button variant="primary" onClick={handleCreateService}>
+                      Thêm dịch vụ
+                    </Button>{" "}
+                    <Button
+                      variant="primary"
+                      onClick={() => {
+                        setIdSpa(spa.id);
+                        setLgShow(true);
+                      }}
+                    >
+                      Xóa Spa
+                    </Button>
+                    <Modal
+                      size="lg"
+                      show={lgShow}
+                      onHide={() => setLgShow(false)}
+                      aria-labelledby="example-modal-sizes-title-lg"
+                    >
+                      <Modal.Header closeButton>
+                        <Modal.Title id="example-modal-sizes-title-lg">
+                          Bạn có muốn xóa Spa này không
+                        </Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body className="place-delete">
+                        <Button
+                          variant="primary"
+                          onClick={handleDelete(idSpa)}
+                        >
+                          Xóa Spa
+                        </Button>{" "}
+                      </Modal.Body>
+                    </Modal>
                   </td>
                 </tr>
               ))}

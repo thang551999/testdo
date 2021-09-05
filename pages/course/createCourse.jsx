@@ -116,13 +116,12 @@ const CreateCourse = () => {
             Nội dung
           </label>
           <br />
-          <input
+          <textarea
             id="name"
-            type="text"
             className="profile-input"
             name="noidung"
             onChange={handleChangeCourse}
-          />
+          ></textarea>
 
           <label htmlFor="name" className="profile-textlabel">
             Giá
@@ -153,13 +152,12 @@ const CreateCourse = () => {
             Thông tin thêm
           </label>
           <br />
-          <input
+          <textarea
             id="name"
-            type="text"
             className="profile-input"
             name="thongtinthem"
             onChange={handleChangeCourse}
-          />
+          ></textarea>
 
           <label htmlFor="name" className="profile-textlabel">
             Số lượng

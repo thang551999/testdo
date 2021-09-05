@@ -54,80 +54,86 @@ const CreatePlace = () => {
     }
   };
 
-  useEffect(()=>{
-    searchAPI.getTinh()
-      .then(res=>{
+  useEffect(() => {
+    searchAPI
+      .getTinh()
+      .then((res) => {
         // console.log(res)
-        setTinh(res.data.results)
+        setTinh(res.data.results);
       })
-      .catch(err=>console.log(err))
-  },[])
+      .catch((err) => console.log(err));
+  }, []);
 
   const handleChangeTinh = (e) => {
     // console.log(e.target.value)
-    setIdTinh(e.target.value)
-  }
+    setIdTinh(e.target.value);
+  };
 
-  useEffect(()=>{
-    searchAPI.getHuyen(idTinh)
-      .then(res=>{
-        setHuyen(res.data.results)
+  useEffect(() => {
+    searchAPI
+      .getHuyen(idTinh)
+      .then((res) => {
+        setHuyen(res.data.results);
       })
-      .catch(err=>console.log(err))
+      .catch((err) => console.log(err));
 
-    searchAPI.getTinhById(idTinh)
-      .then(res=>{
+    searchAPI
+      .getTinhById(idTinh)
+      .then((res) => {
         // console.log(res)
-        setNameTinh(res.data.name)
+        setNameTinh(res.data.name);
       })
-      .catch(err=>console.log(err))
-  },[idTinh])
+      .catch((err) => console.log(err));
+  }, [idTinh]);
 
-  const handleChangeHuyen = (e) =>{
-    setIdHuyen(e.target.value)
-  }
+  const handleChangeHuyen = (e) => {
+    setIdHuyen(e.target.value);
+  };
 
-  useEffect(()=>{
-    searchAPI.getXa(idHuyen)
-      .then(res=>{
-        setXa(res.data.results)
+  useEffect(() => {
+    searchAPI
+      .getXa(idHuyen)
+      .then((res) => {
+        setXa(res.data.results);
       })
-      .catch(err=>console.log(err))
+      .catch((err) => console.log(err));
 
-    searchAPI.getHuyenById(idHuyen)
-      .then(res=>{
+    searchAPI
+      .getHuyenById(idHuyen)
+      .then((res) => {
         // console.log(res)
-        setNameHuyen(res.data.name)
+        setNameHuyen(res.data.name);
       })
-      .catch(err=>console.log(err))
-  },[idHuyen])
+      .catch((err) => console.log(err));
+  }, [idHuyen]);
 
   const handleChangeXa = (e) => {
-    setIdXa(e.target.value)
-  }
+    setIdXa(e.target.value);
+  };
 
-  useEffect(()=>{
-    searchAPI.getXaById(idXa)
-      .then(res=>{
+  useEffect(() => {
+    searchAPI
+      .getXaById(idXa)
+      .then((res) => {
         // console.log(res)
-        setNameXa(res.data.name)
+        setNameXa(res.data.name);
       })
-      .catch(err=>console.log(err))
-  },[idXa])
+      .catch((err) => console.log(err));
+  }, [idXa]);
 
-  useEffect(()=>{
-    if(nameXa==null){
+  useEffect(() => {
+    if (nameXa == null) {
       setNameXa("");
     }
-    if(nameHuyen==null){
+    if (nameHuyen == null) {
       setNameHuyen("");
     }
-    if(nameTinh==null){
+    if (nameTinh == null) {
       setNameTinh("");
     }
     // console.log(diachi + " " + nameXa+ " "+ nameHuyen + " " +nameTinh)
-    setSearch(diachi + " " + nameXa+ " "+ nameHuyen + " " +nameTinh)
-  },[nameTinh, nameHuyen, nameXa, diachi])
+    setSearch(diachi + " " + nameXa + " " + nameHuyen + " " + nameTinh);
+  }, [nameTinh, nameHuyen, nameXa, diachi]);
 
   const handleCreatePlace = (e) => {
     e.preventDefault();
@@ -249,13 +255,12 @@ const CreatePlace = () => {
             Thông tin thêm
           </label>
           <br />
-          <input
+          <textarea
             id="name"
-            type="text"
             className="profile-input"
             name="thongtinthem"
             onChange={handleChangePlace}
-          />
+          ></textarea>
           <label htmlFor="name" className="profile-textlabel">
             Status
           </label>

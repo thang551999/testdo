@@ -1,17 +1,17 @@
-import React from "react";
 import { Link } from "@material-ui/core";
+import React from "react";
 
-const Place = () => {
+const Online = () => {
   return (
     <div className="menu-pt">
       <header className="header-pt">
         <nav className="site-nav">
           <ul>
             <li>
-              <Link href="/place/getAllPlace">Danh sách địa điểm</Link>
+              <Link href="/online/getAllOnline">Danh sách khóa học online</Link>
             </li>
             <li>
-              <Link href="/place/createPlace">Tạo địa điểm mới</Link>
+              <Link href="/online/createOnline">Tạo khóa học online</Link>
             </li>
           </ul>
         </nav>
@@ -20,4 +20,4 @@ const Place = () => {
   );
 };
 
-export default Place;
+export default Online;

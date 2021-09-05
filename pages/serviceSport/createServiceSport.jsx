@@ -1,3 +1,4 @@
+import { Router, useRouter } from "next/router";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -6,6 +7,7 @@ import { sportAPI } from "../api/sport/sport";
 import { uploadAPI } from "../api/upload/upload";
 
 const CreateServiceSport = () => {
+  const Router = useRouter();
   const [selectSport, setSelectSport] = useState([]);
   const [idSport, setIdSport] = useState("");
   const initSport = { name: "", noidung: "", thongtinthem: "", gia: "" };
@@ -56,21 +58,24 @@ const CreateServiceSport = () => {
       thongtinthem: thongtinthem,
       image: image,
       gia: gia,
-      sport: idSport
-    }
-    sportAPI.createSportPlace(body)
-      .then(res=>{
-        console.log(res)
+      sport: idSport,
+    };
+    sportAPI
+      .createSportPlace(body)
+      .then((res) => {
+        // console.log(res);
+        Router.push("/serviceSport/getAllServiceSport");
       })
-      .catch(err=>console.log(err))
-  }
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="create-service">
       <div className="create-spa">
         <div className="profiles">
           <div className="container">
-            <h1 className="title">Thêm dịch vụ cho cơ sở</h1><br />
+            <h1 className="title">Thêm dịch vụ cho cơ sở</h1>
+            <br />
             <label htmlFor="name" className="profile-textlabel">
               Chọn cơ sở thể thao giải trí
             </label>
@@ -109,13 +114,12 @@ const CreateServiceSport = () => {
                 Nội dung
               </label>
               <br />
-              <input
+              <textarea
                 id="name"
-                type="text"
                 className="profile-input"
                 name="noidung"
                 onChange={handleChangeSport}
-              />
+              ></textarea>
 
               <label htmlFor="name" className="profile-textlabel">
                 Image
@@ -135,13 +139,12 @@ const CreateServiceSport = () => {
                 Thông tin thêm
               </label>
               <br />
-              <input
+              <textarea
                 id="name"
-                type="text"
                 className="profile-input"
                 name="thongtinthem"
                 onChange={handleChangeSport}
-              />
+              ></textarea>
 
               <label htmlFor="name" className="profile-textlabel">
                 Giá

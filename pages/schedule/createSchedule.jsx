@@ -13,9 +13,17 @@ import { scheduleAPI } from "../api/schedule/schedule";
 import { ptAPI } from "../api/pt/pt";
 
 const CreateSchedule = () => {
-  const initSchedule = { name: "", thongtinthem: "", soluong: "", gia: "", thoigianbatdau:"", thoigianketthuc: "" };
+  const initSchedule = {
+    name: "",
+    thongtinthem: "",
+    soluong: "",
+    gia: "",
+    thoigianbatdau: "",
+    thoigianketthuc: "",
+  };
   const [adminSchedule, setAdminSchedule] = useState(initSchedule);
-  const { name, thongtinthem, soluong, gia,thoigianbatdau,thoigianketthuc } = adminSchedule;
+  const { name, thongtinthem, soluong, gia, thoigianbatdau, thoigianketthuc } =
+    adminSchedule;
   const [idPlace, setIdPlace] = useState("");
   const [idPt, setIdPt] = useState("");
   const [selectPlace, setSelectPlace] = useState([]);
@@ -38,15 +46,14 @@ const CreateSchedule = () => {
         setSelectPlace(res.data);
       })
       .catch((err) => console.log(err));
-  },[]);
+  }, []);
 
-  useEffect(()=>{
-    ptAPI.getAllPt()
-      .then(res=>{
-        console.log(res)
-        setSelectPt(res.data)
-      })
-  },[]);
+  useEffect(() => {
+    ptAPI.getAllPt().then((res) => {
+      console.log(res);
+      setSelectPt(res.data);
+    });
+  }, []);
 
   const handleChangePlace = (e) => {
     //   console.log(e.target.value)
@@ -54,8 +61,8 @@ const CreateSchedule = () => {
   };
 
   const handleChangePt = (e) => {
-    setIdPt(e.target.value)
-  }
+    setIdPt(e.target.value);
+  };
 
   const handleChangeSchedule = (e) => {
     const { name, value } = e.target;
@@ -120,7 +127,9 @@ const CreateSchedule = () => {
                 Choose an option
               </option>
               {selectPt.map((pt) => (
-                <option key={pt.id} value={pt.id}>{pt.name}</option>
+                <option key={pt.id} value={pt.id}>
+                  {pt.name}
+                </option>
               ))}
             </select>
           </div>
@@ -129,7 +138,7 @@ const CreateSchedule = () => {
           </label>
           <br />
           <div className="pt-select">
-          <select
+            <select
               name="pt"
               className="pt-select-place"
               onChange={handleChangePlace}
@@ -138,7 +147,9 @@ const CreateSchedule = () => {
                 Choose an option
               </option>
               {selectPlace.map((place) => (
-                <option key={place.id} value={place.id}>{place.diachi}</option>
+                <option key={place.id} value={place.id}>
+                  {place.diachi}
+                </option>
               ))}
             </select>
           </div>
@@ -173,13 +184,12 @@ const CreateSchedule = () => {
             Thông tin thêm
           </label>
           <br />
-          <input
+          <textarea
             id="name"
-            type="text"
             className="profile-input"
             name="thongtinthem"
             onChange={handleChangeSchedule}
-          />
+          ></textarea>
 
           <label htmlFor="name" className="profile-textlabel">
             Số lượng
