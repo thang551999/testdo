@@ -139,7 +139,7 @@ const CreateCourseOnline = () => {
             className="profile-input"
             onChange={handleChangeCourseImage}
           />
-          <Image src={image} alt="loading..."></Image>
+          <Image style={{width:"50%"}} src={image} alt="loading..."></Image>
           <br />
 
           <label htmlFor="name" className="profile-textlabel">

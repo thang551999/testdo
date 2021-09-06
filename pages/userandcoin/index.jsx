@@ -80,7 +80,7 @@ const UserAndCoin = () => {
               <th>Name</th>
               <th>Username</th>
               <th>Phone</th>
-              <th>Coin</th>
+              <th>Tiền VND</th>
               <th>Action</th>
             </tr>
           </thead>

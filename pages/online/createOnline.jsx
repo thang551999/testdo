@@ -123,7 +123,7 @@ const CreateOnline = () => {
             className="profile-input"
             onChange={handleChangeOnlineImage}
           />
-          <Image src={image} alt="loading..."></Image>
+          <Image style={{width:"50%"}} src={image} alt="loading..."></Image>
           <br />
           <label htmlFor="name" className="profile-textlabel">
             Thông tin thêm

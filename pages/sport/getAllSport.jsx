@@ -93,7 +93,17 @@ const GetAllSport = () => {
                   <td>{sport.diachi}</td>
                   <td style={{ width: "25%" }}>
                     <Image
-                      src={sport.image}
+                      src={sport.image.split(",")[0]}
+                      alt="Loading..."
+                      style={{ width: "100%" }}
+                    />
+                    <Image
+                      src={sport.image.split(",")[1]}
+                      alt="Loading..."
+                      style={{ width: "100%" }}
+                    />
+                    <Image
+                      src={sport.image.split(",")[2]}
                       alt="Loading..."
                       style={{ width: "100%" }}
                     />

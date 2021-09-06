@@ -42,7 +42,7 @@ function Layout(props) {
                   Place
                 </Link>
               </li>
-              <li className="nav-list-item" style={{ marginLeft: "10%" }}>
+              {/* <li className="nav-list-item" style={{ marginLeft: "10%" }}>
                 <Link
                   href="/pt"
                   className="nav-list-item-link"
@@ -50,7 +50,7 @@ function Layout(props) {
                 >
                   PT
                 </Link>
-              </li>
+              </li> */}
               <li className="nav-list-item" style={{ marginLeft: "10%" }}>
                 <Link
                   href="/course"

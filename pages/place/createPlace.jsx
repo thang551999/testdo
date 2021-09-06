@@ -25,6 +25,10 @@ const CreatePlace = () => {
   const [idXa, setIdXa] = useState("");
   const [nameXa, setNameXa] = useState("");
   const [search, setSearch] = useState("");
+  const [image1, setImage1] = useState("");
+  const [inputImage1, setInputImage1] = useState("");
+  const [image2, setImage2] = useState("");
+  const [inputImage2, setInputImage2] = useState("");
 
   const handleChangePlace = (e) => {
     const { name, value } = e.target;
@@ -45,6 +49,34 @@ const CreatePlace = () => {
       })
       .catch((err) => console.log(err));
   }, [inputImage]);
+
+  const handleChangeImage1 = (e) => {
+    setInputImage1(e.target.files[0]);
+  };
+
+  useEffect(() => {
+    uploadAPI
+      .uploadAvatarAPI(inputImage1)
+      .then((res) => {
+        console.log(res.data.link);
+        setImage1(res.data.link);
+      })
+      .catch((err) => console.log(err));
+  }, [inputImage1]);
+
+  const handleChangeImage2 = (e) => {
+    setInputImage2(e.target.files[0]);
+  };
+
+  useEffect(() => {
+    uploadAPI
+      .uploadAvatarAPI(inputImage2)
+      .then((res) => {
+        console.log(res.data.link);
+        setImage2(res.data.link);
+      })
+      .catch((err) => console.log(err));
+  }, [inputImage2]);
 
   const handleChangeStatus = (e) => {
     if (status === "0") {
@@ -140,7 +172,7 @@ const CreatePlace = () => {
     const body = {
       name: name,
       diachi: search,
-      image: image,
+      image: image+ "," + image1 + "," + image2,
       thongtinthem: thongtinthem,
       status: status,
     };
@@ -248,7 +280,26 @@ const CreatePlace = () => {
             name="image"
             onChange={handleChangeImage}
           />
-          <Image src={image} alt="loading..."></Image>
+          <Image style={{ width: "50%" }} src={image} alt="loading..."></Image>
+          <br />
+          <br />
+          <input
+            id="name"
+            type="file"
+            className="profile-input"
+            name="image"
+            onChange={handleChangeImage1}
+          />
+          <Image style={{ width: "50%" }} src={image1} alt="loading..."></Image>
+          <br />
+          <input
+            id="name"
+            type="file"
+            className="profile-input"
+            name="image"
+            onChange={handleChangeImage2}
+          />
+          <Image style={{ width: "50%" }} src={image2} alt="loading..."></Image>
           <br />
 
           <label htmlFor="name" className="profile-textlabel">

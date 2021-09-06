@@ -11,12 +11,14 @@ const GetAllSpa = () => {
   const Router = useRouter();
   const [lgShow, setLgShow] = useState(false);
   const [idSpa, setIdSpa] = useState("");
+  const [arrayImage, setArrayImage] = useState([]);
 
   useEffect(() => {
     spaAPI
       .getAllSpa()
       .then((res) => {
         // console.log(res);
+        // setArrayImage(res.data.image.split(";"));
         setAdminSpa(res.data);
       })
       .catch((err) => console.log(err));
@@ -58,7 +60,7 @@ const GetAllSpa = () => {
   };
 
   const handleDelete = (id) => (e) => {
-    console.log(id)
+    console.log(id);
     spaAPI
       .deleteSpa(id)
       .then((res) => {
@@ -98,7 +100,17 @@ const GetAllSpa = () => {
                   <td style={{ whiteSpace: "pre-wrap" }}>{spa.thongtinthem}</td>
                   <td style={{ width: "25%" }}>
                     <Image
-                      src={spa.image}
+                      src={spa.image.split(",")[0]}
+                      alt="Loading..."
+                      style={{ width: "100%" }}
+                    />
+                    <Image
+                      src={spa.image.split(",")[1]}
+                      alt="Loading..."
+                      style={{ width: "100%" }}
+                    />
+                    <Image
+                      src={spa.image.split(",")[2]}
                       alt="Loading..."
                       style={{ width: "100%" }}
                     />
@@ -145,10 +157,7 @@ const GetAllSpa = () => {
                         </Modal.Title>
                       </Modal.Header>
                       <Modal.Body className="place-delete">
-                        <Button
-                          variant="primary"
-                          onClick={handleDelete(idSpa)}
-                        >
+                        <Button variant="primary" onClick={handleDelete(idSpa)}>
                           Xóa Spa
                         </Button>{" "}
                       </Modal.Body>

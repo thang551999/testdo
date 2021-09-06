@@ -147,7 +147,7 @@ const CreatePT = () => {
             onChange={handleChangeImage}
             name="image"
           />
-          <Image src={image} alt="load"></Image>
+          <Image style={{width:"50%"}} src={image} alt="load"></Image>
           <br />
 
           <label htmlFor="name" className="profile-textlabel">

@@ -132,7 +132,7 @@ const CreateServiceSport = () => {
                 name="image"
                 onChange={handleChangeImage}
               />
-              <Image src={image} alt="loading..."></Image>
+              <Image style={{width:"50%"}} src={image} alt="loading..."></Image>
               <br />
 
               <label htmlFor="name" className="profile-textlabel">

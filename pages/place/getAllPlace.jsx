@@ -44,7 +44,8 @@ const GetAllPlace = () => {
       .then((res) => {
         // console.log(res)
         setMessage(res.data.message);
-        Router.replace("/place/getAllPlace");
+        // Router.replace("/place/getAllPlace");
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err);
@@ -110,11 +111,21 @@ const GetAllPlace = () => {
                 <td>{place.name}</td>
                 <td>{place.diachi}</td>
                 <td>
-                  <Image
-                    src={place.image}
-                    alt="loading..."
-                    className="admin-img"
-                  ></Image>
+                <Image
+                      src={place.image.split(",")[0]}
+                      alt="Loading..."
+                      style={{ width: "100%" }}
+                    />
+                    <Image
+                      src={place.image.split(",")[1]}
+                      alt="Loading..."
+                      style={{ width: "100%" }}
+                    />
+                    <Image
+                      src={place.image.split(",")[2]}
+                      alt="Loading..."
+                      style={{ width: "100%" }}
+                    />
                 </td>
                 <td  style={{width: "11%"}}>
                   {place.status === "0" ? (
