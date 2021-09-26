@@ -83,7 +83,7 @@ const GetAllSport = () => {
                 <th>Địa chỉ</th>
                 <th>Ảnh đại diện</th>
                 <th>Status</th>
-                <th>Action</th>
+                <th style={{width: "50%"}}>Action</th>
               </tr>
             </thead>
             <tbody id="table">

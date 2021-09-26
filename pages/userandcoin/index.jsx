@@ -85,7 +85,7 @@ const UserAndCoin = () => {
             </tr>
           </thead>
           <tbody id="table">
-            {userandcoinData.map((userandcoinData) => (
+            {userandcoinData.map((userandcoinData,index) => (
               <tr key={userandcoinData.id}>
                 <td>{userandcoinData.customer.name}</td>
                 <td>{userandcoinData.username}</td>

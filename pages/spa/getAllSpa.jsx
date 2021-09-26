@@ -11,7 +11,6 @@ const GetAllSpa = () => {
   const Router = useRouter();
   const [lgShow, setLgShow] = useState(false);
   const [idSpa, setIdSpa] = useState("");
-  const [arrayImage, setArrayImage] = useState([]);
 
   useEffect(() => {
     spaAPI
@@ -90,7 +89,7 @@ const GetAllSpa = () => {
                 <th>Địa chỉ</th>
                 <th>Ảnh đại diện</th>
                 <th>Status</th>
-                <th>Action</th>
+                <th style={{width: "30%"}}>Action</th>
               </tr>
             </thead>
             <tbody id="table">
