@@ -73,7 +73,7 @@ const GetAllSpa = () => {
       <div className="getplace">
         <div className="container alert alert-light">
           {" "}
-          <h2>Tất cả các PT</h2>
+          <h2>Tất cả các Spa</h2>
           <br />
           <input
             id="search"

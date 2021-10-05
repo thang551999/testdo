@@ -1,10 +1,14 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { spaAPI } from "../api/spa/spa";
-import { Image } from "react-bootstrap";
+import { Button, Image, Modal } from "react-bootstrap";
 
 const GetAllService = () => {
   const [serviceSpa, setServiceSpa] = useState([]);
+  const [idSpa, setIdSpa] = useState("");
+  const [lgShow, setLgShow] = useState(false);
+  const [message, setMessage] = useState("");
+
   useEffect(() => {
     spaAPI
       .getAllSpa()
@@ -14,11 +18,24 @@ const GetAllService = () => {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  const handleDelete = (id) => (e) => {
+    spaAPI
+      .deleteService(id)
+      .then((res) => {
+        setMessage("Xóa thành công");
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className="getplace">
       <div className="container alert alert-light">
         {" "}
-        <h2>Tất cả các dịch vụ thể thao giải trí</h2>
+        <h2>Tất cả các dịch vụ chăm sóc sức khởe</h2>
         <br />
         {/* <input
             id="search"
@@ -34,6 +51,7 @@ const GetAllService = () => {
               <th>Nội dung</th>
               <th>Ảnh</th>
               <th>Giá</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody id="table">
@@ -42,7 +60,7 @@ const GetAllService = () => {
                 {serviceSport.dichvu.map((dichvu) => (
                   <tr key={dichvu.id}>
                     <td>{dichvu.tendichvu}</td>
-                    <td style={{whiteSpace: "pre-wrap"}}>{dichvu.noidung}</td>
+                    <td style={{ whiteSpace: "pre-wrap" }}>{dichvu.noidung}</td>
                     <td style={{ width: "25%" }}>
                       <Image
                         src={dichvu.image}
@@ -51,6 +69,38 @@ const GetAllService = () => {
                       />
                     </td>
                     <td>{dichvu.gia}</td>
+                    <td>
+                      <Button
+                        variant="primary"
+                        onClick={() => {
+                          setIdSpa(dichvu.id);
+                          setLgShow(true);
+                        }}
+                      >
+                        Xóa Spa
+                      </Button>
+                      <Modal
+                        size="lg"
+                        show={lgShow}
+                        onHide={() => setLgShow(false)}
+                        aria-labelledby="example-modal-sizes-title-lg"
+                      >
+                        <Modal.Header closeButton>
+                          <Modal.Title id="example-modal-sizes-title-lg">
+                            Bạn có muốn xóa Spa này không
+                          </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body className="place-delete">
+                          <p>{message}</p>
+                          <Button
+                            variant="primary"
+                            onClick={handleDelete(idSpa)}
+                          >
+                            Xóa Spa
+                          </Button>{" "}
+                        </Modal.Body>
+                      </Modal>
+                    </td>
                   </tr>
                 ))}
               </>

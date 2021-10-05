@@ -7,9 +7,21 @@ export const sportAPI = {
   createSportPlace,
   updateStatusSport,
   deleteSport,
+  deleteService,
 };
 
 const token = Cookies.get("token");
+
+function deleteService(id) {
+  return axios.get(
+    "http://18.216.251.104:5000/api/admin/delServiceSportById/" + id,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+}
 
 function getSport() {
   return axios.get("http://18.216.251.104:5000/api/admin/getsport", {

@@ -67,7 +67,7 @@ const GetAllSport = () => {
       <div className="getplace">
         <div className="container alert alert-light">
           {" "}
-          <h2>Tất cả các PT</h2>
+          <h2>Tất cả các Sport</h2>
           <br />
           <input
             id="search"
