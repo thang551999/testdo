@@ -42,7 +42,7 @@ function Layout(props) {
                   Place
                 </Link>
               </li>
-              {/* <li className="nav-list-item" style={{ marginLeft: "10%" }}>
+              {/* <li className="nav-list-item" >
                 <Link
                   href="/pt"
                   className="nav-list-item-link"
@@ -51,7 +51,7 @@ function Layout(props) {
                   PT
                 </Link>
               </li> */}
-              <li className="nav-list-item" style={{ marginLeft: "10%" }}>
+              <li className="nav-list-item" >
                 <Link
                   href="/course"
                   className="nav-list-item-link"
@@ -60,7 +60,7 @@ function Layout(props) {
                   Course
                 </Link>
               </li>
-              {/* <li className="nav-list-item" style={{ marginLeft: "10%" }}>
+              {/* <li className="nav-list-item" >
                 <Link
                   href="/courseOnline"
                   className="nav-list-item-link"
@@ -69,7 +69,7 @@ function Layout(props) {
                   Course Online
                 </Link>
               </li> */}
-              <li className="nav-list-item" style={{ marginLeft: "10%" }}>
+              <li className="nav-list-item" >
                 <Link
                   href="/schedule"
                   className="nav-list-item-link"
@@ -96,7 +96,7 @@ function Layout(props) {
                   Chăm sóc sức khỏe
                 </Link>
               </li>
-              <li className="nav-list-item" style={{ marginLeft: "10%" }}>
+              <li className="nav-list-item" >
                 <Link
                   href="/serviceSpa"
                   className="nav-list-item-link"
@@ -114,7 +114,7 @@ function Layout(props) {
                   Thể thao giải trí
                 </Link>
               </li>
-              <li className="nav-list-item" style={{ marginLeft: "10%" }}>
+              <li className="nav-list-item" >
                 <Link
                   href="/serviceSport"
                   className="nav-list-item-link"
