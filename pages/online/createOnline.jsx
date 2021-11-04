@@ -146,6 +146,7 @@ const CreateOnline = () => {
           </label>
           <br />
           <textarea
+          style={{height:'200px'}}
             name="noidung"
             id=""
             className="profile-input"
@@ -211,12 +212,13 @@ const CreateOnline = () => {
           <br />
           <textarea
             id="name"
+            style={{height:'200px'}}
             className="profile-input"
             name="thongtinthem"
             onChange={handleChangeOnline}
           ></textarea>
           <br />
-          <label htmlFor="name" className="profile-textlabel">
+          {/* <label htmlFor="name" className="profile-textlabel">
             Status
           </label>
           <br />
@@ -224,7 +226,7 @@ const CreateOnline = () => {
             aria-label="option 1"
             name="status"
             onClick={handleChangeStatus}
-          />
+          /> */}
         </div>
 
         <div className="button-container">

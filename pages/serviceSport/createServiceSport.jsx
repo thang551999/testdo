@@ -115,6 +115,7 @@ const CreateServiceSport = () => {
               </label>
               <br />
               <textarea
+              style={{height:'200px'}}
                 id="name"
                 className="profile-input"
                 name="noidung"

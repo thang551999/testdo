@@ -77,11 +77,11 @@ const UserAndCoin = () => {
         <table className="table">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Username</th>
-              <th>Phone</th>
+              <th style={{width: "15%"}}>Tên khách hàng</th>
+              <th style={{width: "20%"}}>Email</th>
+              {/* <th>Phone</th> */}
               <th>Tiền VND</th>
-              <th>Action</th>
+              <th style={{width: "30%"}}>Hành động</th>
             </tr>
           </thead>
           <tbody id="table">
@@ -89,9 +89,20 @@ const UserAndCoin = () => {
               <tr key={userandcoinData.id}>
                 <td>{userandcoinData.customer.name}</td>
                 <td>{userandcoinData.username}</td>
-                <td>{userandcoinData.customer.phonenumber}</td>
-                <td>{userandcoinData.vi.xu}</td>
-                <td style={{ width: "35%" }}>
+                {/* <td>{userandcoinData.customer.phonenumber}</td> */}
+                <td style={{maxWidth:'100px',
+                overflow:'hidden',
+                textOverflow:'ellipsis',
+                
+              
+              
+              }}
+              
+              >{parseInt(userandcoinData.vi.xu).toLocaleString(
+                    "it-IT",
+                    { style: "currency", currency: "VND" }
+                  )}</td>
+                <td style={{ minWidth:"250px", padding: "0rem !important"}}>
                   <Button
                     onClick={() => {
                       setLgShowCoin(true);

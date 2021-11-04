@@ -1,19 +1,22 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import { baseUrl } from "../hello";
 
 export const scheduleAPI = {
   createChedule,
   deleteSchedule,
+  getSchedule
 };
 
 const token = Cookies.get("token");
 
 function createChedule(body) {
   return axios.post(
-    "http://18.216.251.104:5000/api/admin/createschedule",
+    `${baseUrl}/api/admin/createschedule`,
     body,
     {
       headers: {
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
     }
@@ -22,7 +25,18 @@ function createChedule(body) {
 
 function deleteSchedule(id) {
   return axios.get(
-    "http://18.216.251.104:5000/api/admin/delschedule/" + id,
+    `${baseUrl}/api/admin/delschedule/` + id,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+}
+
+function getSchedule() {
+  return axios.get(
+    `${baseUrl}/api/admin/schedules`,
     {
       headers: {
         Authorization: `Bearer ${token}`,

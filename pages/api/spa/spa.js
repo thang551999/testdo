@@ -1,5 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import { baseUrl } from "../hello";
 
 export const spaAPI = {
   createSpa,
@@ -13,7 +14,7 @@ const token = Cookies.get("token");
 
 function deleteService(id) {
   return axios.get(
-    "http://18.216.251.104:5000/api/admin/delServiceSpaById/" + id,
+    `${baseUrl}/api/admin/delServiceSpaById/` + id,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -23,15 +24,16 @@ function deleteService(id) {
 }
 
 function createSpa(body) {
-  return axios.post("http://18.216.251.104:5000/api/admin/createspa", body, {
+  return axios.post(`${baseUrl}/api/admin/createspa`, body, {
     headers: {
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
   });
 }
 
 function deleteSpa(id) {
-  return axios.get("http://18.216.251.104:5000/api/admin/delspa/" + id, {
+  return axios.get(`${baseUrl}/api/admin/delspa/` + id, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -39,7 +41,7 @@ function deleteSpa(id) {
 }
 
 function getAllSpa() {
-  return axios.get("http://18.216.251.104:5000/api/admin/getspa", {
+  return axios.get(`${baseUrl}/api/admin/getspa`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -48,7 +50,7 @@ function getAllSpa() {
 
 function updateStatusSpa(body) {
   return axios.post(
-    "http://18.216.251.104:5000/api/admin/updateStatusSpa",
+    `${baseUrl}/api/admin/updateStatusSpa`,
     body,
     {
       headers: {

@@ -4,43 +4,51 @@ import { useEffect } from "react";
 import { placeAPI } from "../api/place/place";
 import { Button, Modal } from "react-bootstrap";
 import { scheduleAPI } from "../api/schedule/schedule";
-
+import { useRouter } from "next/dist/client/router";
 const GetAllSchedule = () => {
+  const Router = useRouter();
   const [placeSchedule, setPlaceShedule] = useState([]);
   const [schedule, setSchedule] = useState([]);
   const [lgShow, setLgShow] = useState(false);
   const [message, setMessage] = useState("");
   const [idChedule, setIdChedule] = useState("");
   useEffect(() => {
-    placeAPI
-      .getAllPlace()
-      .then((res) => {
-        // console.log(res.data.chedule);
-        setPlaceShedule(res.data);
-        setSchedule(res.data.schedule);
-      })
-      .catch((err) => console.log(err));
-  });
+    scheduleAPI.getSchedule().then((res) => {
+      console.log(res.data)
+      setSchedule(res.data);
+    });
+  }, []);
 
-  const handleDelete = id => e => {
-    scheduleAPI.deleteSchedule(id) 
-      .then(res=>{
+  const handleDelete = (id) => (e) => {
+    scheduleAPI
+      .deleteSchedule(id)
+      .then((res) => {
         // console.log(res)
-        setMessage(res.data.message)
+        setMessage(res.data.message);
         // Router.replace("/pt/getallpt")
         window.location.reload();
       })
-      .catch(err=>{
-        console.log(err)
-        setMessage("Bạn không được quyền xóa")
-      })
-  }
+      .catch((err) => {
+        console.log(err);
+        setMessage("Bạn không được quyền xóa");
+      });
+  };
 
   return (
     <div className="getplace">
       <div className="container alert alert-light">
         {" "}
-        <h2>Tất cả các Lịch hẹn</h2>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <h2>Tất cả các lịch tập</h2>
+          <Button
+            variant="primary"
+            onClick={() => {
+              Router.push("/schedule/createSchedule");
+            }}
+          >
+            Thêm lịch tập
+          </Button>
+        </div>
         <br />
         <input
           id="search"
@@ -58,13 +66,11 @@ const GetAllSchedule = () => {
               <th>Giá</th>
               <th>Số lượng</th>
               <th>Địa điểm</th>
-              <th>Action</th>
+              <th style={{ width: "20%" }}>Action</th>
             </tr>
           </thead>
           <tbody id="table">
-            {placeSchedule.map((placeSchedule) => (
-              <>
-                {placeSchedule.schedule.map((schedule) => (
+                {schedule.map((schedule) => (
                   <tr key={schedule.id}>
                     <td>{schedule.name}</td>
                     <td>{schedule.thoigianbatdau}</td>
@@ -107,8 +113,6 @@ const GetAllSchedule = () => {
                     </td>
                   </tr>
                 ))}
-              </>
-            ))}
           </tbody>
         </table>
       </div>

@@ -10,7 +10,7 @@ function Index(){
   console.log(token)
   useEffect(()=>{
     Router.replace("/login");
-  })
+   })
   return (
     <div className="app">
        

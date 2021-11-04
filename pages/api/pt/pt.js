@@ -20,6 +20,7 @@ function getAllPt() {
 function createPt(body) {
   return axios.post("http://18.216.251.104:5000/api/admin/creatept", body, {
     headers: {
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
   });

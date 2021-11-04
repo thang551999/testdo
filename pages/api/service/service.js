@@ -10,6 +10,7 @@ const token = Cookies.get("token");
 function createService(body) {
   return axios.post("http://18.216.251.104:5000/api/admin/createspaservice", body, {
     headers: {
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
   });

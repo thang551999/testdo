@@ -260,8 +260,8 @@ const CreatePlace = () => {
               </div>
             </div>
           </div>
-
           <input
+            placeholder=' Địa chỉ cụ thể (Số nhà , Tên đường)'
             id="name"
             type="text"
             className="profile-input"
@@ -303,23 +303,24 @@ const CreatePlace = () => {
           <br />
 
           <label htmlFor="name" className="profile-textlabel">
-            Thông tin thêm
+            Nội dung
           </label>
           <br />
           <textarea
+            style={{height:'200px',padding:'10px'}}
             id="name"
             className="profile-input"
             name="thongtinthem"
             onChange={handleChangePlace}
           ></textarea>
-          <label htmlFor="name" className="profile-textlabel">
+          {/* <label htmlFor="name" className="profile-textlabel">
             Status
           </label>
           <Form.Check
             aria-label="option 1"
             name="status"
             onClick={handleChangeStatus}
-          />
+          /> */}
         </div>
         <div className="button-container">
           <button className="profile-button" onClick={handleCreatePlace}>

@@ -116,6 +116,7 @@ const CreateService = () => {
               </label>
               <br />
               <textarea
+              style={{height:'200px'}}
                 id="name"
                 className="profile-input"
                 name="noidung"
@@ -141,6 +142,7 @@ const CreateService = () => {
               </label>
               <br />
               <textarea
+              style={{height:'200px'}}
                 id="name"
                 className="profile-input"
                 name="thongtinthem"

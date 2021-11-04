@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { spaAPI } from "../api/spa/spa";
 import { Button, Image, Modal } from "react-bootstrap";
-
+import { useRouter } from "next/router";
 const GetAllService = () => {
+  const Router = useRouter();
   const [serviceSpa, setServiceSpa] = useState([]);
   const [idSpa, setIdSpa] = useState("");
   const [lgShow, setLgShow] = useState(false);
@@ -35,7 +36,17 @@ const GetAllService = () => {
     <div className="getplace">
       <div className="container alert alert-light">
         {" "}
-        <h2>Tất cả các dịch vụ chăm sóc sức khởe</h2>
+        <div style={{ display: "flex", justifyContent: "space-between" ,marginBottom:'10px'}}>
+          <h2>Tất cả các dịch vụ chăm sóc sức khoẻ</h2>
+          <Button
+            variant="primary"
+            onClick={() => {
+              Router.push("/serviceSpa/createService");
+            }}
+          >
+           Thêm dịch vụ làm đẹp
+          </Button>
+        </div>
         <br />
         {/* <input
             id="search"
@@ -51,7 +62,7 @@ const GetAllService = () => {
               <th>Nội dung</th>
               <th>Ảnh</th>
               <th>Giá</th>
-              <th>Action</th>
+              <th style={{width: "20%"}}>Action</th>
             </tr>
           </thead>
           <tbody id="table">
@@ -77,7 +88,7 @@ const GetAllService = () => {
                           setLgShow(true);
                         }}
                       >
-                        Xóa Spa
+                        Xóa
                       </Button>
                       <Modal
                         size="lg"
@@ -87,7 +98,7 @@ const GetAllService = () => {
                       >
                         <Modal.Header closeButton>
                           <Modal.Title id="example-modal-sizes-title-lg">
-                            Bạn có muốn xóa Spa này không
+                            Bạn có muốn xóa dich vu này không
                           </Modal.Title>
                         </Modal.Header>
                         <Modal.Body className="place-delete">
@@ -96,7 +107,7 @@ const GetAllService = () => {
                             variant="primary"
                             onClick={handleDelete(idSpa)}
                           >
-                            Xóa Spa
+                            Xóa
                           </Button>{" "}
                         </Modal.Body>
                       </Modal>

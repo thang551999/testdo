@@ -262,6 +262,7 @@ const CreateSport = () => {
             </div>
 
             <input
+             placeholder="Địa chỉ cụ thể (Số nhà /Tên đường)"
               id="name"
               type="text"
               className="profile-input"
@@ -314,11 +315,12 @@ const CreateSport = () => {
             ></Image>
             <br />
 
-            <label htmlFor="name" className="profile-textlabel">
-              Thông tin thêm
+            <label htmlFor="name" className="profile-textlabel" >
+             Nội dung
             </label>
             <br />
             <textarea
+            style={{height:'200px'}}
               id="name"
               className="profile-input"
               name="thongtinthem"
@@ -337,14 +339,14 @@ const CreateSport = () => {
               onChange={handleChangeSport}
             />
 
-            <label htmlFor="name" className="profile-textlabel">
+            {/* <label htmlFor="name" className="profile-textlabel">
               Status
-            </label>
-            <Form.Check
+            </label> */}
+            {/* <Form.Check
               aria-label="option 1"
               name="status"
               onClick={handleChangeStatus}
-            />
+            /> */}
           </div>
           <div className="button-container">
             <button className="profile-button" onClick={handleSubmitSport}>

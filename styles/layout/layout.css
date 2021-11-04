@@ -153,6 +153,7 @@ ol.nav-list .nav-list-item-header h3 {
 /******** Header Row ********/
 
 .header-row {
+    z-index:999;
     position: fixed;
     top: 0;
     left: 230px;

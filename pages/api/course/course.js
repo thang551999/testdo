@@ -1,5 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import { baseUrl } from "../hello";
 
 export const courseAPI = {
   createCourse,
@@ -10,15 +11,16 @@ export const courseAPI = {
 const token = Cookies.get("token");
 
 function createCourse(body) {
-  return axios.post("http://18.216.251.104:5000/api/admin/createcourse", body, {
+  return axios.post(`${baseUrl}/api/admin/createcourse`, body, {
     headers: {
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
   });
 }
 
 function getAllCourse() {
-  return axios.get("http://18.216.251.104:5000/api/admin/getallcourse", {
+  return axios.get(`${baseUrl}/api/admin/getallcourse`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -27,7 +29,7 @@ function getAllCourse() {
 
 function deleteCourse(id) {
   return axios.get(
-    "http://18.216.251.104:5000/api/admin/delschedule/" + id,
+    `${baseUrl}/api/admin/delcourse/` + id,
     {
       headers: {
         Authorization: `Bearer ${token}`,

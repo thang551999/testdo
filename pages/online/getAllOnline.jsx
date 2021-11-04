@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { onlineAPI } from "../api/online/online";
 import { Button, Image, Modal } from "react-bootstrap";
-
+import { useRouter } from "next/dist/client/router";
 const GetAllOnline = () => {
+  const Router = useRouter();
   const [dataOnline, setDataOnline] = useState([]);
   const [lgShow, setLgShow] = useState(false);
   const [idOnline, setIdOnline] = useState("");
@@ -31,16 +32,24 @@ const GetAllOnline = () => {
     <div className="getplace">
       <div className="container alert alert-light">
         {" "}
-        <h2>Tất cả các Khóa học Online</h2>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <h2>Tất cả các khóa học Online</h2>
+          <Button
+            variant="primary"
+            onClick={() => {
+              Router.push("/online/createOnline");
+            }}
+          >
+            Khóa học Online
+          </Button>
+        </div>
         <br />
         <table className="table">
           <thead>
             <tr>
               <th>Tên khóa học</th>
-              <th>Nội dung</th>
-              <th>Thông tin thêm</th>
               <th>Ảnh đại diện</th>
-              <th>Action</th>
+              <th style={{width: "20%"}}>Action</th>
             </tr>
           </thead>
           <tbody id="table">
@@ -48,11 +57,7 @@ const GetAllOnline = () => {
               <>
                 <tr key={course.id}>
                   <td>{course.tenkhoahoc}</td>
-                  <td style={{ whiteSpace: "pre-wrap" }}>{course.noidung}</td>
-                  <td style={{ whiteSpace: "pre-wrap" }}>
-                    {course.thongtinthem}
-                  </td>
-                  <td>
+                  <td >
                     <Image src={course.image} className="admin-img"></Image>
                   </td>
                   <td>
@@ -63,7 +68,7 @@ const GetAllOnline = () => {
                         setLgShow(true);
                       }}
                     >
-                      Xóa Place
+                      Xóa khóa học online 
                     </Button>
                     <Modal
                       size="lg"
@@ -73,7 +78,7 @@ const GetAllOnline = () => {
                     >
                       <Modal.Header closeButton>
                         <Modal.Title id="example-modal-sizes-title-lg">
-                          Bạn có muốn xóa địa điểm này không
+                          Bạn có muốn xóa khoá học online không
                         </Modal.Title>
                       </Modal.Header>
                       <Modal.Body className="place-delete">
@@ -81,7 +86,7 @@ const GetAllOnline = () => {
                           variant="primary"
                           onClick={handleDelete(idOnline)}
                         >
-                          Xóa địa điểm
+                          Xóa
                         </Button>{" "}
                       </Modal.Body>
                     </Modal>

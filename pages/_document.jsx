@@ -10,7 +10,8 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head lang="en">
-          <meta name="description" content="nextjsElearning" />
+          <meta name="description" content="Thegioifitness" />
+          <meta itemProp="image"  content="http://thegioifitness.com/banner1.jpg"/>
         </Head>
 
         <body>

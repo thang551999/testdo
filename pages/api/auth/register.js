@@ -1,9 +1,9 @@
 import axios from "axios";
-
+import { baseUrl } from "../hello";
 export const RegisterAPI = {
     postRegister,
 }
 
 function postRegister(body) {
-    return axios.post("http://18.216.251.104:5000/api/auth/register", body);
+    return axios.post(`${baseUrl}/api/auth/register`, body);
 }

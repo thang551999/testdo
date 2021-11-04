@@ -9,6 +9,7 @@ export const placeAPI = {
   deletePlace,
   updataStatus,
   courseOnline,
+  getPlace
 };
 
 function getAllPlace() {
@@ -19,12 +20,19 @@ function getAllPlace() {
   });
 }
 
+export function getPlace(id){
+  return axios.get(`http://18.216.251.104:5000/api/customer/getplacebyid/${id}`);
+}
+
 function createPlace(body) {
-  return axios.post("http://18.216.251.104:5000/api/admin/addpalce", body, {
-    headers: {
+  console.log(JSON.stringify(body))
+  console.log(body)
+   return axios.post("http://18.216.251.104:5000/api/admin/addpalce", body, {
+     headers: {
+    'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
-    },
-  });
+   },
+   });
 }
 
 function deletePlace(id) {

@@ -90,7 +90,7 @@ const CreateCourse = () => {
               onChange={handleChangePlace}
             >
               <option selected disabled>
-                Choose an option
+                Chọn phòng tập
               </option>
               {selectPlace.map((place) => (
                 <option key={place.id} value={place.id}>
@@ -112,16 +112,17 @@ const CreateCourse = () => {
             onChange={handleChangeCourse}
           />
 
-          <label htmlFor="name" className="profile-textlabel">
+          {/* <label htmlFor="name" className="profile-textlabel">
             Nội dung
           </label>
           <br />
           <textarea
+          style={{height:'200px'}}
             id="name"
             className="profile-input"
             name="noidung"
             onChange={handleChangeCourse}
-          ></textarea>
+          ></textarea> */}
 
           <label htmlFor="name" className="profile-textlabel">
             Giá
@@ -149,10 +150,11 @@ const CreateCourse = () => {
           <br />
 
           <label htmlFor="name" className="profile-textlabel">
-            Thông tin thêm
+            Nội dung
           </label>
           <br />
           <textarea
+           style={{height:'200px'}}
             id="name"
             className="profile-input"
             name="thongtinthem"

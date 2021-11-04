@@ -13,6 +13,7 @@ function Layout(props) {
     Cookies.remove("token");
     Router.replace("/login");
   };
+const admin =Cookies.get("username")
   return (
     <div>
       <div id="app" className="nav-drawer-is-open">
@@ -22,66 +23,93 @@ function Layout(props) {
               <li className="nav-list-item nav-list-item-header"></li>
               <li className="nav-list-item">
                 <Link
-                  href="/dashboard"
-                  className="nav-list-item-link is-selected"
+                  href="/profiles"
+                  className={
+                    Router.pathname.includes("profiles")
+                      ? "nav-list-item-link is-selected"
+                      : "nav-list-item-link"
+                  }
                 >
-                  Dashboard
+                  Thông tin admin
                 </Link>
               </li>
               <li className="nav-list-item">
-                <Link href="/userandcoin" className="nav-list-item-link">
+                <Link
+                  href="/userandcoin"
+                  className={
+                    Router.pathname.includes("userandcoin")
+                      ? "nav-list-item-link is-selected"
+                      : "nav-list-item-link"
+                  }
+                >
                   Quản lý user và coin
                 </Link>
               </li>
               <li className="nav-list-item">
                 <Link
-                  href="/place"
-                  className="nav-list-item-link"
+                  href="/place/getAllPlace"
+                  className={
+                    Router.pathname.includes("place")
+                      ? "nav-list-item-link is-selected"
+                      : "nav-list-item-link"
+                  }
                   id="nav-item-orders"
                 >
-                  Place
+                  Phòng tập
                 </Link>
               </li>
               {/* <li className="nav-list-item" >
                 <Link
                   href="/pt"
-                  className="nav-list-item-link"
+                 className={Router.pathname === '/userandcoin' ? 'nav-list-item-link is-selected' : 'nav-list-item-link'}
                   id="nav-item-orders"
                 >
                   PT
                 </Link>
               </li> */}
-              <li className="nav-list-item" >
+              <li className="nav-list-item">
                 <Link
-                  href="/course"
-                  className="nav-list-item-link"
+                  href="/course/allCourse"
+                  className={
+                    Router.pathname.includes("course")
+                      ? "nav-list-item-link is-selected"
+                      : "nav-list-item-link"
+                  }
                   id="nav-item-orders"
                 >
-                  Course
+                  Khoá học 
                 </Link>
               </li>
               {/* <li className="nav-list-item" >
                 <Link
                   href="/courseOnline"
-                  className="nav-list-item-link"
+                 className={Router.pathname === '/userandcoin' ? 'nav-list-item-link is-selected' : 'nav-list-item-link'}
                   id="nav-item-orders"
                 >
                   Course Online
                 </Link>
               </li> */}
-              <li className="nav-list-item" >
+              <li className="nav-list-item">
                 <Link
-                  href="/schedule"
-                  className="nav-list-item-link"
+                  href="/schedule/getAllSchedule"
+                  className={
+                    Router.pathname.includes("schedule")
+                      ? "nav-list-item-link is-selected"
+                      : "nav-list-item-link"
+                  }
                   id="nav-item-orders"
                 >
-                  Schedule
+                  Lịch tập
                 </Link>
               </li>
               <li className="nav-list-item">
                 <Link
-                  href="/online"
-                  className="nav-list-item-link"
+                  href="/online/getAllOnline"
+                  className={
+                    Router.pathname.includes("online")
+                      ? "nav-list-item-link is-selected"
+                      : "nav-list-item-link"
+                  }
                   id="nav-item-orders"
                 >
                   Khóa học online
@@ -89,17 +117,25 @@ function Layout(props) {
               </li>
               <li className="nav-list-item">
                 <Link
-                  href="/spa"
-                  className="nav-list-item-link"
+                  href="/spa/getAllSpa"
+                  className={
+                    Router.pathname.includes("spa")
+                      ? "nav-list-item-link is-selected"
+                      : "nav-list-item-link"
+                  }
                   id="nav-item-orders"
                 >
-                  Chăm sóc sức khỏe
+                  Chăm sóc sức khỏe làm đẹp
                 </Link>
               </li>
-              <li className="nav-list-item" >
+              <li className="nav-list-item">
                 <Link
-                  href="/serviceSpa"
-                  className="nav-list-item-link"
+                  href="/serviceSpa/getAllService"
+                  className={
+                    Router.pathname.includes("serviceSpa")
+                      ? "nav-list-item-link is-selected"
+                      : "nav-list-item-link"
+                  }
                   id="nav-item-orders"
                 >
                   Dịch vụ
@@ -107,17 +143,25 @@ function Layout(props) {
               </li>
               <li className="nav-list-item">
                 <Link
-                  href="/sport"
-                  className="nav-list-item-link"
+                  href="/sport/getAllSport"
+                  className={
+                    Router.pathname.includes("sport")
+                      ? "nav-list-item-link is-selected"
+                      : "nav-list-item-link"
+                  }
                   id="nav-item-orders"
                 >
                   Thể thao giải trí
                 </Link>
               </li>
-              <li className="nav-list-item" >
+              <li className="nav-list-item">
                 <Link
-                  href="/serviceSport"
-                  className="nav-list-item-link"
+                  href="/serviceSport/getAllServiceSport"
+                  className={
+                    Router.pathname.includes("serviceSport")
+                      ? "nav-list-item-link is-selected"
+                      : "nav-list-item-link"
+                  }
                   id="nav-item-orders"
                 >
                   Dịch vụ giải trí
@@ -126,7 +170,7 @@ function Layout(props) {
               {/* <li className="nav-list-item">
                 <Link
                   href="/checkin"
-                  className="nav-list-item-link"
+                 className={Router.pathname === '/userandcoin' ? 'nav-list-item-link is-selected' : 'nav-list-item-link'}
                   id="nav-item-orders"
                 >
                   Check In
@@ -143,7 +187,7 @@ function Layout(props) {
                 id="dropdown-button-dark-example2"
                 variant="secondary"
                 // menuVariant="dark"
-                title="Admin"
+                title={admin}
                 className="mt-2"
               >
                 <Dropdown.Item href="/profiles" className="admin-header-menu">

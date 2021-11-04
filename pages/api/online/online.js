@@ -1,5 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import { baseUrl } from "../hello";
 
 export const onlineAPI = {
   createOnline,
@@ -10,15 +11,16 @@ export const onlineAPI = {
 const token = Cookies.get("token");
 
 function createOnline(body) {
-  return axios.post("http://18.216.251.104:5000/api/admin/online", body, {
+  return axios.post(`${baseUrl}/api/admin/online`, body, {
     headers: {
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
   });
 }
 
 function getAllOnline() {
-  return axios.get("http://18.216.251.104:5000/api/admin/online", {
+  return axios.get(`${baseUrl}/api/admin/online`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -26,7 +28,7 @@ function getAllOnline() {
 }
 
 function deleteOnline(id) {
-  return axios.get("http://18.216.251.104:5000/api/admin/delonline/" + id, {
+  return axios.get(`${baseUrl}/api/admin/delonline/` + id, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

@@ -3,8 +3,9 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { courseAPI } from "../api/course/course";
 import { Button, Image, Modal } from "react-bootstrap";
-
+import { useRouter } from "next/dist/client/router";
 const AllCourse = () => {
+  const Router = useRouter();
   const [adminCourse, setAdminCourse] = useState([]);
   const [lgShow, setLgShow] = useState(false);
   const [adminCoursePlace, setAdminCoursePlace] = useState();
@@ -14,31 +15,41 @@ const AllCourse = () => {
     courseAPI
       .getAllCourse()
       .then((res) => {
-        // console.log(res.data);
         setAdminCourse(res.data);
         setAdminCoursePlace(res.data.courseList);
       })
       .catch((err) => console.log(err));
-  });
+  },[]);
 
-  const handleDelete = id => e => {
-    courseAPI.deleteCourse(id) 
-      .then(res=>{
+  const handleDelete = (id) => (e) => {
+    courseAPI
+      .deleteCourse(id)
+      .then((res) => {
         // console.log(res)
-        setMessage(res.data.message)
+        setMessage(res.data.message);
         window.location.reload();
       })
-      .catch(err=>{
-        console.log(err)
-        setMessage("Bạn không được quyền xóa")
-      })
-  }
+      .catch((err) => {
+        console.log(err);
+        setMessage("Bạn không được quyền xóa");
+      });
+  };
 
   return (
     <div className="getplace">
       <div className="container alert alert-light">
         {" "}
-        <h2>Tất cả các Khóa học</h2>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <h2>Tất cả các khóa học</h2>
+          <Button
+            variant="primary"
+            onClick={() => {
+              Router.push("/course/createCourse");
+            }}
+          >
+            Thêm khóa học
+          </Button>
+        </div>
         <br />
         <input
           id="search"
@@ -51,12 +62,10 @@ const AllCourse = () => {
           <thead>
             <tr>
               <th>Tên khóa học</th>
-              <th>Nội dung</th>
-              <th>Thông tin thêm</th>
               <th>Ảnh đại diện</th>
               <th>Số lượng</th>
               <th>Địa chỉ</th>
-              <th>Action</th>
+              <th style={{ width: "20%" }}>Action</th>
             </tr>
           </thead>
           <tbody id="table">
@@ -65,10 +74,11 @@ const AllCourse = () => {
                 {course.courseList.map((courselist) => (
                   <tr key={courselist.id}>
                     <td>{courselist.tenkhoahoc}</td>
-                    <td style={{whiteSpace: "pre-wrap"}}>{courselist.noidung}</td>
-                    <td style={{whiteSpace: "pre-wrap"}}>{courselist.thongtinthem}</td>
                     <td>
-                      <Image src={courselist.image} className="admin-img"></Image>
+                      <Image
+                        src={courselist.image}
+                        className="admin-img"
+                      ></Image>
                     </td>
                     <td>{courselist.soluong}</td>
                     <td>{course.diachi}</td>
@@ -81,7 +91,7 @@ const AllCourse = () => {
                           setMessage("");
                         }}
                       >
-                        Xóa Course
+                        Xóa
                       </Button>
                       <Modal
                         size="lg"
@@ -100,7 +110,7 @@ const AllCourse = () => {
                             variant="primary"
                             onClick={handleDelete(idCourse)}
                           >
-                            Xóa Course
+                            Xóa
                           </Button>{" "}
                         </Modal.Body>
                       </Modal>

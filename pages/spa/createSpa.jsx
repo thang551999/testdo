@@ -261,6 +261,7 @@ const CreateSpa = () => {
             </div>
 
             <input
+            placeholder="Địa chỉ cụ thể (Số nhà /tên đường)"
               id="name"
               type="text"
               className="profile-input"
@@ -305,6 +306,7 @@ const CreateSpa = () => {
             </label>
             <br />
             <textarea
+            style={{height:'200px'}}
               name="thongtinthem"
               id="name"
               className="profile-input"
@@ -323,14 +325,14 @@ const CreateSpa = () => {
               onChange={handleChangeSpa}
             />
 
-            <label htmlFor="name" className="profile-textlabel">
+            {/* <label htmlFor="name" className="profile-textlabel">
               Status
             </label>
             <Form.Check
               aria-label="option 1"
               name="status"
               onClick={handleChangeStatus}
-            />
+            /> */}
           </div>
           <div className="button-container">
             <button className="profile-button" onClick={handleCreateSpa}>

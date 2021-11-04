@@ -5,7 +5,7 @@ import { placeAPI } from "../api/place/place";
 import { Button, Modal } from "react-bootstrap";
 import { useRouter } from "next/dist/client/router";
 import { Image } from "react-bootstrap";
-
+import { Carousel, Container } from "react-bootstrap";
 const GetAllPlace = () => {
   const Router = useRouter();
   const [idPlace, setIdPlace] = useState("");
@@ -62,7 +62,7 @@ const GetAllPlace = () => {
       .updataStatus(body)
       .then((res) => {
         console.log(res);
-        window.location.reload()
+        window.location.reload();
       })
       .catch((err) => console.log(err));
   };
@@ -77,7 +77,7 @@ const GetAllPlace = () => {
       .updataStatus(body)
       .then((res) => {
         console.log(res);
-        window.location.reload()
+        window.location.reload();
       })
       .catch((err) => console.log(err));
   };
@@ -86,7 +86,17 @@ const GetAllPlace = () => {
     <div className="getplace">
       <div className="container alert alert-light">
         {" "}
-        <h2>Tất cả các địa điểm</h2>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div style={{whiteSpace:"pre-wrap"}}> Tất cả các địa điểm</div>
+          <Button
+            variant="primary"
+            onClick={() => {
+              Router.push("/place/createPlace");
+            }}
+          >
+            Thêm địa điểm 
+          </Button>
+        </div>
         <br />
         <input
           id="search"
@@ -101,7 +111,7 @@ const GetAllPlace = () => {
               <th>Tên</th>
               <th>Địa chỉ</th>
               <th>Ảnh</th>
-              <th>Status</th>
+              <th>Hiện thị/ Ẩn</th>
               <th>Tạo mới</th>
             </tr>
           </thead>
@@ -111,25 +121,30 @@ const GetAllPlace = () => {
                 <td>{place.name}</td>
                 <td>{place.diachi}</td>
                 <td>
-                <Image
-                      src={place.image.split(",")[0]}
-                      alt="Loading..."
-                      style={{ width: "100%" }}
-                    />
-                    <Image
-                      src={place.image.split(",")[1]}
-                      alt="Loading..."
-                      style={{ width: "100%" }}
-                    />
-                    <Image
-                      src={place.image.split(",")[2]}
-                      alt="Loading..."
-                      style={{ width: "100%" }}
-                    />
+                 
+                <div  className="multi-image">
+              <Carousel interval={3000000} nextLabel='' prevLabel='' variant="dark" >
+                {place.image &&
+                  place.image.split(",").map((e, index) => {
+                    return (
+                      <Carousel.Item key={index}>
+                        <Image
+                          className="d-block w-100"
+                          src={e}
+                          alt="First slide"
+                        />
+                        
+                      </Carousel.Item>
+                    );
+                  })}
+              </Carousel>
+            </div>
+                    
                 </td>
-                <td  style={{width: "11%"}}>
+                <td>
                   {place.status === "0" ? (
                     <Button
+                      style={{ marginTop: "10px" }}
                       variant="primary"
                       onClick={handleUpdateStatus(place.id)}
                     >
@@ -137,6 +152,7 @@ const GetAllPlace = () => {
                     </Button>
                   ) : (
                     <Button
+                      style={{ marginTop: "10px" }}
                       variant="primary"
                       onClick={handleUpdateStatusShow(place.id)}
                     >
@@ -144,14 +160,30 @@ const GetAllPlace = () => {
                     </Button>
                   )}
                 </td>
-                <td style={{width: "35%"}}>
-                  <Button variant="primary" onClick={handleToCreatePt}>
-                    Thêm PT
-                  </Button>{" "}
-                  <Button variant="primary" onClick={handleToCreateCourse}>
-                    Thêm Course
+                <td
+                  style={{
+                    height:'100%',
+                    minWidth: "200px",
+                    justifyContent: "space-between",
+                    flexDirection: "column",
+                  }}
+                >
+                  <Button
+                    style={{ margin: "10px" }}
+                    variant="primary"
+                    onClick={handleToCreatePt}
+                  >
+                    Thêm huấn luận viên
                   </Button>{" "}
                   <Button
+                    style={{ margin: "10px" }}
+                    variant="primary"
+                    onClick={handleToCreateCourse}
+                  >
+                    Thêm khoá học
+                  </Button>{" "}
+                  <Button
+                    style={{ margin: "10px" }}
                     variant="primary"
                     onClick={() => {
                       setIdPlace(place.id);
@@ -159,7 +191,25 @@ const GetAllPlace = () => {
                       setMessage("");
                     }}
                   >
-                    Xóa Place
+                    Xóa phòng gym
+                  </Button>
+                  <Button
+                    style={{ margin: "10px" }}
+                    variant="primary"
+                    onClick={() => {
+                     Router.push(`/place/${place.id}`)
+                    }}
+                  >
+                   Xem chi tiết
+                  </Button>
+                  <Button
+                    style={{ margin: "10px" }}
+                    variant="primary"
+                    onClick={()=>{
+                      Router.push('/pt/getallpt')
+                    }}
+                  >
+                    Danh sách huấn luận viên
                   </Button>
                   <Modal
                     size="lg"

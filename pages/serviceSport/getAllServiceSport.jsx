@@ -3,12 +3,13 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { Button, Modal, Image } from "react-bootstrap";
 import { sportAPI } from "../api/sport/sport";
-
+import { useRouter } from "next/dist/client/router";
 const GetAllServiceSport = () => {
   const [serviceSport, setServiceSport] = useState([]);
   const [idSport, setIdSport] = useState("");
   const [lgShow, setLgShow] = useState(false);
   const [message, setMessage] = useState("");
+  const Router = useRouter();
   useEffect(() => {
     sportAPI
       .getSport()
@@ -35,8 +36,17 @@ const GetAllServiceSport = () => {
     <div className="getplace">
       <div className="container alert alert-light">
         {" "}
-        <h2>Tất cả các dịch vụ thể thao giải trí</h2>
-        <br />
+        <div style={{ display: "flex", justifyContent: "space-between" ,marginBottom:'10px' }}>
+          <h2>Tất cả các dịch vụ thể thao giải trí</h2>
+          <Button
+            variant="primary"
+            onClick={() => {
+              Router.push("/serviceSport/createServiceSport");
+            }}
+          >
+            Thêm dịch vụ thể thao
+          </Button>
+        </div>
         {/* <input
           id="search"
           type="text"
@@ -51,7 +61,7 @@ const GetAllServiceSport = () => {
               <th>Nội dung</th>
               <th>Ảnh</th>
               <th>Giá</th>
-              <th>Action</th>
+              <th style={{width: "20%"}}>Action</th>
             </tr>
           </thead>
           <tbody id="table">

@@ -181,10 +181,11 @@ const CreateSchedule = () => {
           <br />
 
           <label htmlFor="name" className="profile-textlabel">
-            Thông tin thêm
+            Nội dung
           </label>
           <br />
           <textarea
+          style={{height:'200px'}}
             id="name"
             className="profile-input"
             name="thongtinthem"

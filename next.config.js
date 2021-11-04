@@ -17,6 +17,7 @@ module.exports = {
         config.experiments = {};
         return config;
     },
+    // basePath: '/admin'
 }
 
 // const withCSS = require('@zeit/next-css')

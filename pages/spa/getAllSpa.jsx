@@ -1,11 +1,10 @@
-import { Router } from "@material-ui/icons";
 import { useRouter } from "next/router";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Button, Modal, Image } from "react-bootstrap";
 import { spaAPI } from "../api/spa/spa";
-
+import { Carousel, Container } from "react-bootstrap";
 const GetAllSpa = () => {
   const [adminSpa, setAdminSpa] = useState([]);
   const Router = useRouter();
@@ -25,7 +24,7 @@ const GetAllSpa = () => {
 
   const handleCreateService = (e) => {
     e.preventDefault();
-    Router.push("/service/createService");
+    Router.push("/serviceSpa/createService");
   };
 
   const handleUpdateStatusSpa = (id) => (e) => {
@@ -73,8 +72,17 @@ const GetAllSpa = () => {
       <div className="getplace">
         <div className="container alert alert-light">
           {" "}
-          <h2>Tất cả các Spa</h2>
-          <br />
+          <div style={{ display: "flex", justifyContent: "space-between" ,marginBottom:'10px'}}>
+          <h2>Tất cả các chăm sóc sức khoẻ làm đẹp</h2>
+          <Button
+            variant="primary"
+            onClick={() => {
+              Router.push("/spa/createSpa");
+            }}
+          >
+           Thêm spa
+          </Button>
+        </div>
           <input
             id="search"
             type="text"
@@ -96,23 +104,23 @@ const GetAllSpa = () => {
               {adminSpa.map((spa) => (
                 <tr key={spa.id}>
                   <td>{spa.name}</td>
-                  <td style={{ whiteSpace: "pre-wrap" }}>{spa.thongtinthem}</td>
-                  <td style={{ width: "25%" }}>
-                    <Image
-                      src={spa.image.split(",")[0]}
-                      alt="Loading..."
-                      style={{ width: "100%" }}
-                    />
-                    <Image
-                      src={spa.image.split(",")[1]}
-                      alt="Loading..."
-                      style={{ width: "100%" }}
-                    />
-                    <Image
-                      src={spa.image.split(",")[2]}
-                      alt="Loading..."
-                      style={{ width: "100%" }}
-                    />
+                  <td style={{ whiteSpace: "pre-wrap" }}>{spa.diachi}</td>
+                  <td style={{ width: "65%" }}>
+                  <Carousel interval={3000000} nextLabel='' prevLabel='' variant="dark" >
+                {spa.image &&
+                  spa.image.split(",").map((e, index) => {
+                    return (
+                      <Carousel.Item key={index}>
+                        <Image
+                          className="d-block w-100"
+                          src={e}
+                          alt={`anh ${index} `}
+                        />
+                        
+                      </Carousel.Item>
+                    );
+                  })}
+              </Carousel>
                   </td>
                   <td>
                     {spa.status == "0" ? (
@@ -131,11 +139,12 @@ const GetAllSpa = () => {
                       </Button>
                     )}
                   </td>
-                  <td>
-                    <Button variant="primary" onClick={handleCreateService}>
+                  <td style={{flexDirection:'column',justifyContent:'space-between'}}>
+                    <Button style={{margin:'10px'}} variant="primary" onClick={handleCreateService}>
                       Thêm dịch vụ
                     </Button>{" "}
                     <Button
+                    style={{margin:'10px'}}
                       variant="primary"
                       onClick={() => {
                         setIdSpa(spa.id);
