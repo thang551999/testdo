@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-
+import { baseUrl } from "../hello";
 const token = Cookies.get("token");
 
 export const placeAPI = {
@@ -13,7 +13,7 @@ export const placeAPI = {
 };
 
 function getAllPlace() {
-  return axios.get("http://18.216.251.104:5000/api/admin/getallplace", {
+  return axios.get(`${baseUrl}/api/admin/getallplace`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -21,13 +21,13 @@ function getAllPlace() {
 }
 
 export function getPlace(id){
-  return axios.get(`http://18.216.251.104:5000/api/customer/getplacebyid/${id}`);
+  return axios.get(`${baseUrl}/api/customer/getplacebyid/${id}`);
 }
 
 function createPlace(body) {
   console.log(JSON.stringify(body))
   console.log(body)
-   return axios.post("http://18.216.251.104:5000/api/admin/addpalce", body, {
+   return axios.post(`${baseUrl}/api/admin/addpalce`, body, {
      headers: {
     'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
@@ -36,7 +36,7 @@ function createPlace(body) {
 }
 
 function deletePlace(id) {
-  return axios.get("http://18.216.251.104:5000/api/admin/delplace/" + id, {
+  return axios.get(`${baseUrl}/api/admin/delplace/` + id, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -44,7 +44,7 @@ function deletePlace(id) {
 }
 
 function updataStatus(body) {
-  return axios.post("http://18.216.251.104:5000/api/admin/updateStatus", body, {
+  return axios.post(`${baseUrl}/api/admin/updateStatus`, body, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -52,7 +52,7 @@ function updataStatus(body) {
 }
 
 function courseOnline(body) {
-  return axios.post("http://18.216.251.104:5000/api/admin/online", body, {
+  return axios.post(`${baseUrl}/api/admin/online`, body, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-
+import { baseUrl } from "../hello";
 const token = Cookies.get("token");
 
 export const profilesAPI = {
@@ -8,7 +8,7 @@ export const profilesAPI = {
 };
 
 function getProfiles(headers) {
-  return axios.get("http://18.216.251.104:5000/api/admin/profile", {
+  return axios.get(`${baseUrl}/api/admin/profile`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-
+import { baseUrl } from "../hello";
 export const serviceAPI = {
   createService,
 };
@@ -8,7 +8,7 @@ export const serviceAPI = {
 const token = Cookies.get("token");
 
 function createService(body) {
-  return axios.post("http://18.216.251.104:5000/api/admin/createspaservice", body, {
+  return axios.post(`${baseUrl}/api/admin/createspaservice`, body, {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
@@ -17,7 +17,7 @@ function createService(body) {
 }
 
 function getAllSpa() {
-  return axios.get("http://18.216.251.104:5000/api/admin/getspa", {
+  return axios.get(`${baseUrl}/api/admin/getspa`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
