@@ -27,7 +27,7 @@ function deleteService(id) {
 }
 
 function getSport() {
-  return axios.get("http://18.216.251.104:5000/api/admin/getsport", {
+  return axios.get(`${baseUrl}/api/admin/getsport`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -35,7 +35,7 @@ function getSport() {
 }
 
 function deleteSport(id) {
-  return axios.get("http://18.216.251.104:5000/api/admin/delsport/" + id, {
+  return axios.get(`${baseUrl}/api/admin/delsport/` + id, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -43,7 +43,7 @@ function deleteSport(id) {
 }
 
 function createSport(body) {
-  return axios.post("http://18.216.251.104:5000/api/admin/createsport", body, {
+  return axios.post(`${baseUrl}/api/admin/createsport`, body, {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
@@ -53,7 +53,7 @@ function createSport(body) {
 
 function createSportPlace(body) {
   return axios.post(
-    "http://18.216.251.104:5000/api/admin/createsportplace",
+    `${baseUrl}/api/admin/createsportplace`,
     body,
     {
       headers: {
@@ -66,7 +66,7 @@ function createSportPlace(body) {
 
 function updateStatusSport(body) {
   return axios.post(
-    "http://18.216.251.104:5000/api/admin/updateStatusSport",
+    `${baseUrl}/api/admin/updateStatusSport`,
     body,
     {
       headers: {
