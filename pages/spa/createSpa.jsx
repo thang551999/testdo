@@ -232,7 +232,7 @@ const CreateSpa = () => {
                   onChange={handleChangeHuyen}
                 >
                   <option selected disabled>
-                    Chọn 1 Huyện
+                    Chọn 1 Huyện/Quận
                   </option>
                   {huyen.map((huyen) => (
                     <option key={huyen.district_id} value={huyen.district_id}>
@@ -248,7 +248,7 @@ const CreateSpa = () => {
                     onChange={handleChangeXa}
                   >
                     <option selected disabled>
-                      Chọn 1 Xã
+                      Chọn 1 Xã/Phường
                     </option>
                     {xa.map((xa) => (
                       <option key={xa.ward_id} value={xa.ward_id}>
