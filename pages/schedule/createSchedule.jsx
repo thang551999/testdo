@@ -148,7 +148,7 @@ const CreateSchedule = () => {
               </option>
               {selectPlace.map((place) => (
                 <option key={place.id} value={place.id}>
-                  {place.diachi}
+                  {place.name}
                 </option>
               ))}
             </select>

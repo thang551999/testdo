@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-
+import { baseUrl } from "../hello";
 export const uploadAPI = {
   uploadAvatarAPI,
 };

@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { baseUrl } from "../hello";
 export const searchAPI = {
   getTinh,
   getHuyen,
